@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
 import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
-import { LayoutOutlined,CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined, SearchOutlined,LoginOutlined} from '@ant-design/icons'
+import {CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 import { isLogined,clearToken } from '../../utils/auth';
 import LogoutHeaderNav from './LogoutHeaderNav';
@@ -47,7 +47,8 @@ class HeaderNav extends Component {
     // }
     
     render() {
-        this.state.islog=isLogined()
+        //this.state.islog=isLogined()
+        this.state.islog=true
         return (
             this.state.islog?
             <div >
@@ -76,38 +77,10 @@ class HeaderNav extends Component {
                                 <Menu.Item key="home" icon={<HomeOutlined />}
                                 style={{margin:'0 50px'}}
                                 >
-                                    <a href="#/home" target="_blank" rel="noopener noreferrer">
+                                    <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
                                         首页
                                     </a>
                                 </Menu.Item>
-                                <Menu.Item key="compPage" icon={<RadarChartOutlined />}
-                                style={{margin:'0 50px'}}
-                                >
-                                    <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
-                                        比赛
-                                    </a>
-                                </Menu.Item>
-                                <Menu.Item key="community" icon={<LayoutOutlined />}
-                                style={{margin:'0 50px'}}
-                                >
-                                    <a href="#/community" target="_blank" rel="noopener noreferrer">
-                                        社区
-                                    </a>
-                                </Menu.Item>
-
-                                <Menu.Item  key="searchMenu" icon={<SearchOutlined />}
-                                style={{margin:'0 50px'}}
-                                >
-                                    <a href="#/search" target="_blank" rel="noopener noreferrer">
-                                        搜索
-                                    </a>
-                                {/* <Search 
-                                    placeholder="请输入想要搜索的内容"
-                                    // onChange={this.inputChange.bind(this)}
-                                    onSearch={value => this.searchJump(value)}
-                                    style={{ width: 400 }}
-                                /> */}
-                                </Menu.Item>  
                                 
                                 <SubMenu icon={<UserOutlined />} 
                                 style={{margin:'0 50px'}}

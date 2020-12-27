@@ -11,12 +11,13 @@ export default class MastHead extends Component {
     constructor(props){
         super(props)
         this.state={
-            account:this.props.account,
+            //account:this.props.account,
+            account:123456,
             nickname:null,
             role:this.props.role,
             image:null,
         }
-        if(isLogined()){
+        /*if(isLogined()){
         var token=JSON.parse( localStorage.getItem('token')).token
           Axios.get('/Users/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
           .then(respons=>{
@@ -36,12 +37,9 @@ export default class MastHead extends Component {
           {
             window.alert("请登录查看他人信息")
             window.location.hash="#/home"
-          }
+          }*/
       }
     
-
-
-
     
     render() {
         return (

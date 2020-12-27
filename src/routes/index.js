@@ -67,7 +67,7 @@ export const mainRoutes = [{
 {
     path: "/home",
     title: "主页",
-    component: Homepage
+    component: AllCompetitionPage
 },
 
 {
