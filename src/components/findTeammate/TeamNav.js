@@ -16,18 +16,19 @@ export default class teamNav extends Component {
       matchIntroduction:'',
       matchMaxMemberNum:''
     }
-    axios.get('/Project/'+matchId)
+    var token = JSON.parse(localStorage.getItem('token')).token
+    axios.get('/project/projects/'+matchId, { headers: { token:token } })
     .then(response=>{
       console.log(response.data)
       this.setState({
-        matchName:response.data.name,
-        matchIntroduction:response.data.introduction,
-        matchMaxMemberNum:response.data.participantsNumber
+        matchName:response.data.detail.name,
+        matchIntroduction:response.data.detail.introduction,
+        matchMaxMemberNum:response.data.detail.maxNumber
       })
   })
   .catch(error=>{
     window.alert('连接出错，点击确定返回主页')
-    window.location.hash ='#/home'
+    window.location.hash ='#/allCompPage'
     console.log(error);
   })
 }

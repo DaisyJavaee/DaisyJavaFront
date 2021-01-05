@@ -23,7 +23,12 @@ const NormalLoginForm = () => {
       console.log(response)
       setToken(response.data.detail, values.username)
       window.alert("登陆成功")
-      window.location.href='#/allCompPage'
+      //if(response.data.detail.admin==0){
+        window.location.href='#/allCompPage'
+      //}
+      //else{
+        //window.location.href='#/admin'
+      //}
     })
     .catch(function (error) {
       window.alert("登陆失败")
