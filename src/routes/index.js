@@ -5,6 +5,7 @@ import PostPage from "../pages/findteam/PostPage";
 import FindTeam from "../pages/findteam/FindTeam";
 import CompetitionPage from "../pages/competition/competitionPage";
 import AllCompetitionPage from "../pages/competition/allCompetitionPage";
+import Homepage from "../pages/homepage";
 
 import CompNotice from "../pages/message/compNotice";
 import Apply from "../pages/personal/userReceivedApplication";
@@ -46,7 +47,11 @@ export const mainRoutes = [{
     title: "主页",
     component: Login
 },
-
+{
+    path: "/homePage",
+    title: "主页公告",
+    component: Homepage
+},
 {
     path: "/postpage/MatchId=:ProjctId/groupId=:groupId/Pid=:id",
     title: "寻找队伍帖",

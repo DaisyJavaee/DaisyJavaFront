@@ -7,8 +7,6 @@ import './compShow.css'
 import CONSTURL from './config'
 import Axios from 'axios';
 import '../../style/homepage.css'
-Axios.defaults.baseURL='/api'
-
 const { Header, Footer, Sider, Content } = Layout;
 const sourceData = [];
 const IconText = ({ icon, text }) => (

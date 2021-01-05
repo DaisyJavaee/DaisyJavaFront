@@ -38,7 +38,7 @@ export default class FindTeam extends Component {
                     </div>
                     <br/>
                     <Divider/>
-                    
+                    <div id='PublishPost'><PublishPost matchId={this.state.matchId}/></div>
                     <br/>
                     </div>
                     </div>

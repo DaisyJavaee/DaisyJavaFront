@@ -25,7 +25,6 @@ class Homepage extends Component {
                 <HeaderNav/>
                 <FloatHelper/>
                 <TopBar/>
-                <CompShow/>
                 <Footer/>
             </div>
         )

@@ -9,7 +9,6 @@ import axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
-axios.defaults.baseURL='/api';
 var userdata=JSON.parse(localStorage.getItem('userData'));
 
 const Editor = ({onChange}) => (

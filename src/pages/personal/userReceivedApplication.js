@@ -15,7 +15,7 @@ const onAlertClose = (e) => {
     window.location.reload()
   };
 
-export default class Apply extends Component {
+export default class ReceivedApplication extends Component {
 
     constructor(props) {
         super(props);

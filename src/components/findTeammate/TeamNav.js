@@ -3,8 +3,6 @@ import React, { Component } from 'react'
 import axios from 'axios'
 import '../../style/findTeam/findTeam.css'
 
-axios.defaults.baseURL='/api';
-
 export default class teamNav extends Component {
 
   /*接收比赛名称*/
@@ -17,7 +15,7 @@ export default class teamNav extends Component {
       matchMaxMemberNum:''
     }
     var token = JSON.parse(localStorage.getItem('token')).token
-    axios.get('/project/projects/'+matchId, { headers: { token:token } })
+    axios.get('projects/'+matchId, { headers: { token:token } })
     .then(response=>{
       console.log(response.data)
       this.setState({

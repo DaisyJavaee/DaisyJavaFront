@@ -15,100 +15,32 @@ const onAlertClose = (e) => {
     window.location.reload()
   };
 
-export default class Apply extends Component {
+export default class AppliedApplication extends Component {
 
-    constructor(props) {
-        super(props);
-        this.state = {
-          account:'',
-          data:[],
-          visible: false,
-          flag: "",
-          choice: ""
-        }
-        var token=JSON.parse( localStorage.getItem('token')).token
-        axios
-          .get('/user/applications/receive' ,{ headers: { token: token }})
-          .then((res)=>{
-            this.setState({
-            data: res.detail
-          })
-          })
-          .catch(function(error){
-            console.log(error)
-          })
+  constructor(props) {
+    super(props);
+    this.state = {
+      account:'',
+      data:[],
+      visible: false,
+      flag: "",
+      choice: ""
     }
+    var token=JSON.parse( localStorage.getItem('token')).token
+    const expandGroup = (application)=>{
+      axios
+        .get(`/groupId/${application.groupId}`, { headers: { token: token }})
+        .then((res)=>(res.detail))
+        .then((res)=>({...application, res}))};
+    axios
+      .get(`/user/applications/receive`, { headers: { token: token }})
+      .then((res)=>(res.detail))
+      .then((detail)=>Promise.all(
+        detail.map(application=>(expandGroup(application)))))
+      .then((data)=>{this.setState("data", data)})
+}
 
 
-    showDrawer = () => {
-      this.setState({
-        visible: true,
-      });
-    };
-    
-      onClose = () => {
-        this.setState({
-          visible: false,
-        });
-      };
-
-      handleChange(value) {
-        console.log(`selected ${value}`);
-        this.setState({ 
-            flag: value
-          });
-      };
-      
-      putData(value1, value2) {
-        var data = {
-            projectId: value1,
-            account: this.state.account,
-            groupId: value2,
-            result: this.state.choice,
-
-        }
-       console.log("data:",data)
-        var token = JSON.parse(localStorage.getItem('token')).token
-        axios
-        .put(`/Application`, data, {
-          headers: { token: token },
-        })
-        .then((res) => {
-          console.log(res)
-        })
-        .catch(erro=>{
-            console.log(erro)
-        })
-      }
-
-      handleClick(valueProjectId, valueGroupId) {
-          if(this.state.flag==true){
-            this.setState({ 
-                choice: "successful"
-            });               
-          }
-          else if(this.state.flag==false){
-            this.setState({ 
-                choice: "failed"
-            }); 
-          }
-        this.putData(valueProjectId, valueGroupId);
-        this.onClose();
-        this.render=()=>{
-            return(
-
-                <Alert
-                message="Success Tips"
-                description="Detailed description and advice about successful copywriting."
-                type="success"
-                closable
-                showIcon
-                onClose={onAlertClose}
-                />   
-
-            )
-        }
-      }
 
     componentDidMount(){
         if(isLogined()){
@@ -154,10 +86,7 @@ export default class Apply extends Component {
                             </Col>
 
                             <Col span={6}>
-                                <Button onClick={this.showDrawer}>
-                                        审核
-                                </Button>
- 
+                                <List.Item.Meta> {item.result}</List.Item.Meta>
                             </Col>
                         </Row>
                                 

@@ -1,7 +1,5 @@
 
 const CONSTURL={
-  //  hosturl:'http://fwdarling2020.cn:8080',
-  //  hosturl:'/api',
     UserAva1:'../../img/avatar/boss.jpg',
     UserAva2:'../../img/avatar/strange.jpg',
     UserAva3:'../../img/avatar/bear.jpg',

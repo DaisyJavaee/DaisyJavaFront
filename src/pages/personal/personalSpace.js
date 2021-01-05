@@ -14,6 +14,8 @@ import styles from './Center.less';
 import { Card } from 'antd';
 import UserComp from './userComp'
 import UserTeam from './userTeam'
+import ReceivedApplication from './userReceivedApplication';
+import AppliedApplication from './userAppliedApplication';
 const operationTabList = [
   {
     key: 'teams',
@@ -33,7 +35,7 @@ const operationTabList = [
     key: 'projects',
     tab: (
       <span>
-         {' '}
+        比赛{' '}
         <span
           style={{
             fontSize: 14,
@@ -78,15 +80,16 @@ export default class PersonalSpace extends Component {
     super(props)
 
     this.state={
-      account:this.props.match.params.account,      //role=1表示本人视角，role=0表示其他人视角
-      tabKey: 'teams'
+      account: this.props.match.params.account,  
+      tabKey:'teams',
+      role: false
     }
-
+    this.setState({})
     if (!isLogined()) {
-      this.setState("role", false)
+      this.setState({"role": false})
     } else {
       var logined = JSON.parse(localStorage.getItem('userData')).account
-      this.setState("role", logined === this.state.account)
+      this.setState({"role": logined === this.props.match.params.account})
     }
 
   };
@@ -108,11 +111,11 @@ export default class PersonalSpace extends Component {
     }
 
     if (tabKey === 'applied') {
-      return <UserComp />;
+      return <AppliedApplication />;
     }
     
     if (tabKey === 'received') {
-      return <UserComp />;
+      return <ReceivedApplication />;
     }
     return null;
   };
