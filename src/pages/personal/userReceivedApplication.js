@@ -7,7 +7,7 @@ import {isLogined} from "../../utils/auth"
 import { CheckCircleTwoTone, NotificationOutlined } from '@ant-design/icons';
 
 //import CONSTURL from '../../components/community/config';
-import Axios from 'axios';
+import axios from 'axios';
 const { Option } = Select;
 
 const onAlertClose = (e) => {
@@ -25,108 +25,53 @@ export default class Apply extends Component {
           visible: false,
           flag: "",
           choice: ""
-        };
-    }
-
-      showDrawer = () => {
-        this.setState({
-          visible: true,
-        });
-      };
-    
-      onClose = () => {
-        this.setState({
-          visible: false,
-        });
-      };
-
-      handleChange(value) {
-        console.log(`selected ${value}`);
-        this.setState({ 
-            flag: value
-          });
-      };
-      
-      putData(value1, value2) {
-        var data = {
-            projectId: value1,
-            account: this.state.account,
-            groupId: value2,
-            result: this.state.choice,
-
         }
-       console.log("data:",data)
-        var token = JSON.parse(localStorage.getItem('token')).token
-        Axios
-        .put(`/Application`, data, {
+        var token=JSON.parse( localStorage.getItem('token')).token
+        const expandGroup = (application)=>{
+          axios
+            .get(`/groupId/${application.groupId}`, { headers: { token: token }})
+            .then((res)=>(res.detail))
+            .then((res)=>({...application, res}))};
+        axios
+          .get(`/user/applications/receive`, { headers: { token: token }})
+          .then((res)=>(res.detail))
+          .then((detail)=>Promise.all(
+            detail.map(application=>(expandGroup(application)))))
+          .then((data)=>{this.setState("data", data)})
+    }
+    
+
+    showDrawer = () => {
+      this.setState({
+        visible: true,
+      });
+    };
+    
+    onClose = () => {
+      this.setState({
+        visible: false,
+      });
+    };
+
+
+    handleClick(groupId, applicationId) {
+      var token = JSON.parse(localStorage.getItem('token')).token
+      axios
+        .patch(`/groups/${groupId}/applications/${applicationId}`, {result: this.state.choice }, {
           headers: { token: token },
         })
-        .then((res) => {
-          console.log(res)
+        .error(err=>{
+            console.log(err)
         })
-        .catch(erro=>{
-            console.log(erro)
-        })
-      }
-
-      handleClick(valueProjectId, valueGroupId) {
-          if(this.state.flag==true){
-            this.setState({ 
-                choice: "successful"
-            });               
-          }
-          else if(this.state.flag==false){
-            this.setState({ 
-                choice: "failed"
-            }); 
-          }
-        this.putData(valueProjectId, valueGroupId);
-        this.onClose();
-        this.render=()=>{
-            return(
-
-                <Alert
-                message="Success Tips"
-                description="Detailed description and advice about successful copywriting."
-                type="success"
-                closable
-                showIcon
-                onClose={onAlertClose}
-                />   
-
-            )
-        }
-      }
-
-    componentDidMount(){
-        if(isLogined()){
-            var token = JSON.parse(localStorage.getItem('token')).token
-            var tempAccount = JSON.parse(localStorage.userData).account;
-            this.state.account = tempAccount;
-
-            Axios
-            .get(`/Application/`+this.state.account,{
-                headers: { token: token },
-            })
-            .then((res) => { 
-                var result=res.data
-                this.setState({data:result})
-                //console.log(res)
-            })
-        }
+      this.onClose();
     }
-    
 
     render() {
-
-        //初始化render数组状态
-        let objArr=this.state.data
-
         return (
             <div>
                 <List 
                 itemLayout="vertical" 
-                dataSource={objArr}
+                dataSource={this.state.data}
                 renderItem={item => (
                     <List.Item>
                         <Row>
@@ -161,17 +106,13 @@ export default class Apply extends Component {
                                         </Form.Item>
 
                                         <Form.Item>
-                                            <Button type="primary" htmlType="submit" onClick={()=>{this.handleClick(item.projectId, item.groupId)}}>
+                                            <Button type="primary" htmlType="submit" onClick={()=>{this.handleClick(item.groupId, item.applicationId)}}>
                                             Submit
                                             </Button>
                                         </Form.Item>
                                     </Form>
                                 </Drawer>  
                             </Col>
-                        </Row>
-                        
-                        <Row>
-                            {"申请理由："+item.content}                            
                         </Row>
                                 
                     </List.Item>

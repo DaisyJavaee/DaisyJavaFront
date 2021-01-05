@@ -7,13 +7,12 @@ import CompetitionPage from "../pages/competition/competitionPage";
 import AllCompetitionPage from "../pages/competition/allCompetitionPage";
 
 import CompNotice from "../pages/message/compNotice";
-import Apply from "../pages/message/apply";
+import Apply from "../pages/personal/userReceivedApplication";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
 import UserTeam from "../pages/personal/userTeam"
 import UserComp from "../pages/personal/userComp"
 import UserInform from "../pages/personal/userInform"
-import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
 
@@ -139,25 +138,4 @@ export const messageRoutes = [
     path: "/message/apply",
     title: "组队申请",
     component: Apply
-}]
-
-export const personalRoutes = [{
-    path: "/personal/account=:account/team",
-    title: "队伍",
-    component: UserTeam
-},
-{
-    path: "/personal/account=:account/comp",
-    title: "比赛",
-    component: UserComp
-},
-{
-    path: "/personal/account=:account/inform",
-    title: "资料",
-    component: UserInform
-},
-{
-    path: "/personal/account=:account/post",
-    title: "发布",
-    component: UserPost
 }]
