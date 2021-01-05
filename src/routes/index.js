@@ -2,27 +2,20 @@ import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
 import PageNotFound from "../pages/pageNotFound";
 import PostPage from "../pages/findteam/PostPage";
-import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
-import Community from "../pages/community/Community";
 import CompetitionPage from "../pages/competition/competitionPage";
 import AllCompetitionPage from "../pages/competition/allCompetitionPage";
 
-import Reply from "../pages/message/reply";
 import CompNotice from "../pages/message/compNotice";
 import Apply from "../pages/message/apply";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
 import UserTeam from "../pages/personal/userTeam"
 import UserComp from "../pages/personal/userComp"
-import UserColle from "../pages/personal/userColle"
 import UserInform from "../pages/personal/userInform"
 import UserPost from "../pages/personal/userPost"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
-import PostCollection from "../pages/personal/Postcollection"
-import MomentCollection from "../pages/personal/MomentCollection"
-import NewColle from "../pages/personal/newCollection"
 
 import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
@@ -67,16 +60,6 @@ export const mainRoutes = [{
     component: FindTeam
 },
 {
-    path: "/Community",
-    title: "社区",
-    component: Community
-},
-{
-    path: "/Moment/:id",
-    title: "动态",
-    component: Moment
-},
-{
     path: "/compPage/id=:compID",
     title: "比赛页面",
     component: CompetitionPage
@@ -97,26 +80,10 @@ export const mainRoutes = [{
     component: Editinform
 },
 {
-    path: "/newColle/account=:account",
-    title: "新建收藏夹",
-    component: NewColle
-},
-{
     path: "/editTeam/:teamID",
     title: "编辑小队",
     component: EditTeam
 },
-{
-    path: "/postCollection/account=:account/fileName=:fileName",
-    title: "帖子收藏夹",
-    component: PostCollection
-},
-{
-    path: "/momentCollection/account=:account/fileName=:fileName",
-    title: "评论收藏夹",
-    component: MomentCollection
-},
-
 {
     path: "/login",
     title: "登录",
@@ -164,11 +131,6 @@ export const messageRoutes = [
     component: CompNotice
 },
 {
-    path: "/message/reply",
-    title: "回复我的",
-    component: Reply
-},
-{
     path: "/message/team",
     title: "队伍消息",
     component: TeamMessage
@@ -188,11 +150,6 @@ export const personalRoutes = [{
     path: "/personal/account=:account/comp",
     title: "比赛",
     component: UserComp
-},
-{
-    path: "/personal/account=:account/colle",
-    title: "收藏",
-    component: UserColle
 },
 {
     path: "/personal/account=:account/inform",

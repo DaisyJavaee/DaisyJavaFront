@@ -7,24 +7,24 @@ export default class MyMenuItem extends Component {
         return (
             <div>
                 <Menu mode="horizontal">
-                    <Menu.Item  key="team">
+                    <Menu.Item key="team">
                         <Link to={"/personal/account="+this.props.account+"/team"}>
                             我的队伍
                         </Link>
                     </Menu.Item>
-                    <Menu.Item  key="comp">
+                    <Menu.Item key="comp">
                         <Link to={"/personal/account="+this.props.account+"/comp"}>
                             我的比赛
                         </Link>
                     </Menu.Item>
-                    <Menu.Item  key="colle">
-                        <Link to={"/personal/account="+this.props.account+"/colle"}>
-                            我的收藏
+                    <Menu.Item key="applied">
+                        <Link to={"/personal/account="+this.props.account+"/applied"}>
+                            我的申请
                         </Link>
                     </Menu.Item>
-                    <Menu.Item  key="post">
-                        <Link to={"/personal/account="+this.props.account+"/post"}>
-                            我的发布
+                    <Menu.Item key="received">
+                        <Link to={"/personal/account="+this.props.account+"/received"}>
+                            我的审核
                         </Link>
                     </Menu.Item>
                 </Menu>
