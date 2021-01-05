@@ -23,7 +23,7 @@ export default class UserColle extends Component {
             Privacy:file.privacy
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.put('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.put('/FavouritePackage',content,{headers: { token: token }})
     }
 
     

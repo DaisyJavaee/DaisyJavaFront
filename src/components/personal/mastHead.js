@@ -19,7 +19,7 @@ export default class MastHead extends Component {
         }
         /*if(isLogined()){
         var token=JSON.parse( localStorage.getItem('token')).token
-          Axios.get('/Users/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+          Axios.get('/Users/'+this.state.account,{headers: { token: token }})
           .then(respons=>{
               var pictureurl=respons.data.icon
             Axios.get(pictureurl)

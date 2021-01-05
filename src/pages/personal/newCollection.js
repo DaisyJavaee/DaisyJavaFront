@@ -84,7 +84,7 @@ export default class NewCollection extends Component {
     createFile(){
         var token=JSON.parse( localStorage.getItem('token')).token
         var content={Account:this.state.account,CreateTime:moment().format("YYYY-MM-DDThh:mm:ssC"),Name:this.state.fileName,Privacy:this.state.private,Type:this.state.type}
-        Axios.post('/FavouritePackage',content,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.post('/FavouritePackage',content,{headers: { token: token }})
         .catch(error=>{
             console.log(error);
             console.log(error.response.status);

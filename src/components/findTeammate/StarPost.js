@@ -27,7 +27,7 @@ export default class StarPost extends Component {
             folderName:[]
         }
         console.log(this.state)
-        axios.get('/FavouritePackage/'+this.state.userData.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/FavouritePackage/'+this.state.userData.account,{headers: { token: token }})
         .then(response=>{
             console.log(response.data)
             this.setState((state)=>{
@@ -75,7 +75,7 @@ export default class StarPost extends Component {
                                   PostId:parseInt(this.state.postId)
                                 }
                                 console.log(dataSent)
-                                axios.post('/PostStar',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
+                                axios.post('/PostStar',dataSent,{headers: { token: token }})
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("收藏成功")

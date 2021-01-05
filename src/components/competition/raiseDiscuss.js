@@ -109,7 +109,7 @@ export default class RaiseDiscuss extends React.Component {
     var data={account:userData.account,projectId:parseInt(this.props.compID),time:moment().format("YYYY-MM-DDTHH:mm:ssC"),
     content:this.state.value,picture:userData.icon}
 
-    axios.post('/Discussion',data, {headers: { "Authorization": 'Bearer ' +token }})
+    axios.post('/Discussion',data, {headers: { token: token }})
     .then(response=>{
       console.log(response);
     })

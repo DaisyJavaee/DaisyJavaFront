@@ -18,7 +18,7 @@ export default class MomentColletion extends Component {
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.get("/MomentStar?Account="+this.state.account+"&Name="+this.state.filename,
-            {headers: { "Authorization": 'Bearer ' +token }})
+            {headers: { token: token }})
             .then((res)=>{
                 this.setState(
                     {
@@ -32,7 +32,7 @@ export default class MomentColletion extends Component {
         {
             var token=JSON.parse( localStorage.getItem('token')).token
             Axios.delete('/MomentStar?MomentId='+momentId+'&Account='+this.state.account+'&Name='+this.state.filename,
-            {headers: { "Authorization": 'Bearer ' +token }})
+            {headers: { token: token }})
             .then(()=>{
                 let fdata=[...this.state.data]
                 for(let i=0;i<fdata.length;i++){

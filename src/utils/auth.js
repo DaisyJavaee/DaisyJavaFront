@@ -67,7 +67,7 @@ export function clearToken() {
 //获取用户的各种信息
 export function getUserInfor(account){
   var token=JSON.parse( localStorage.getItem('token')).token
-  axios.get('/Users/'+account,{headers: { "Authorization": 'Bearer ' +token }})
+  axios.get('/Users/'+account,{headers: { token: token }})
   .then(function (response) {
     console.log(response);
     var data=response.data

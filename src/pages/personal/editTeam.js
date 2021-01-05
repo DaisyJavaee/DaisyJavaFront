@@ -23,7 +23,7 @@ export default class EditTeam extends Component{
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.get('/Usergroup?GroupId='+this.props.location.query.GroupId+'&ProjectId='+this.props.location.query.ProjectId,
-        {headers: { "Authorization": 'Bearer ' +token }})
+        {headers: { token: token }})
         .then((res)=>{
             this.setState({
                 name:res.data.name,
@@ -45,7 +45,7 @@ export default class EditTeam extends Component{
     deleteMember(account){
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.delete('/Member',{ProjectId:parseInt(this.state.ProjectId),GroupId:parseInt(this.state.GroupId),Account:account},
-        {headers: { "Authorization": 'Bearer ' +token }})
+        {headers: { token: token }})
         .catch(function(error){
             console.log(error)
             window.alert("删除失败")
@@ -60,7 +60,7 @@ export default class EditTeam extends Component{
             introduction:this.state.Introduction
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.put('/Usergroup',content,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.put('/Usergroup',content,{headers: { token: token }})
         .then(
             window.alert("修改成功")
         )

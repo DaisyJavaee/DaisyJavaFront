@@ -9,13 +9,12 @@ export default class UserTeam extends Component {
         super(props)
         this.state={
           data:[],
-          account:this.props.match.params.account
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/Usergroup/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.get('/user/groups', {headers: { token: token }})
         .then((res)=>{
             this.setState({
-                data:res.data,
+                data:res.detail,
             })
         })
         .catch(function(error){

@@ -18,7 +18,7 @@ handleClick(id){
         else{*/
             var token=JSON.parse( localStorage.getItem('token')).token
             axios.post('/subscribe',{Account:JSON.parse(localStorage.getItem('userData')).account,ProjectId:parseInt(id)},
-            {headers: { "Authorization": 'Bearer ' +token }})
+            {headers: { token: token }})
             .then(response=>{
                 console.log(response);
                 window.alert("订阅成功")

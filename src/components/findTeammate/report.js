@@ -96,7 +96,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
       }
       if(dataSent.account.length>0){
         console.log(dataSent)
-      axios.post('/Report',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
+      axios.post('/Report',dataSent,{headers: { token: token }})
           .then(response=>{
             console.log(response)
             window.alert("举报成功")

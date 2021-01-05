@@ -174,7 +174,7 @@ export default class CreatePost extends React.Component {
             name:this.state.Name
           }
           console.log(dataSent);
-          axios.post('/Post',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
+          axios.post('/Post',dataSent,{headers: { token: token }})
           .then(response=>{
             console.log(response)
             //window.location.reload()

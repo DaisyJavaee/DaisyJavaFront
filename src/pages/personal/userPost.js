@@ -21,7 +21,7 @@ export default class UserPost extends Component {
     componentDidMount()
     {
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.get('/User/Post/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.get('/User/Post/'+this.state.account,{headers: { token: token }})
         .then((res)=>{
             this.setState({
                 postData:res.data
@@ -30,7 +30,7 @@ export default class UserPost extends Component {
         .catch(function(error){
             console.log(error)
          })
-         axios.get('/User/Moment/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+         axios.get('/User/Moment/'+this.state.account,{headers: { token: token }})
          .then((res)=>{
             this.setState({
                 momentData:res.data
@@ -39,7 +39,7 @@ export default class UserPost extends Component {
          .catch(function(error){
              console.log(error)
           })
-          axios.get('/User/Discussion/'+this.state.account,{headers: { "Authorization": 'Bearer ' +token }})
+          axios.get('/User/Discussion/'+this.state.account,{headers: { token: token }})
          .then((res)=>{
             this.setState({
                 discussionData:res.data
@@ -54,13 +54,13 @@ export default class UserPost extends Component {
     deleteDiscuss(disId,ProId)
     {   
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.delete('/discussion?discussionId='+disId+'&projectId='+ProId,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.delete('/discussion?discussionId='+disId+'&projectId='+ProId,{headers: { token: token }})
         .catch(error=>{console.log(error)})
     }
     deleteMoment(Mid)
     {
         var token=JSON.parse( localStorage.getItem('token')).token
-        axios.delete('/Moment/'+Mid,{headers: { "Authorization": 'Bearer ' +token }})
+        axios.delete('/Moment/'+Mid,{headers: { token: token }})
         .catch(error=>{console.log(error)})
     }
     render() {

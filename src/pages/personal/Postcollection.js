@@ -18,7 +18,7 @@ export default class PostColletion extends Component {
         }
         var token=JSON.parse( localStorage.getItem('token')).token
         Axios.get("/PostStar?Account="+this.state.account+"&Name="+this.state.filename,
-            {headers: { "Authorization": 'Bearer ' +token }})
+            {headers: { token: token }})
             .then((res)=>{
                 this.setState(
                     {
@@ -32,7 +32,7 @@ export default class PostColletion extends Component {
         {
             var token=JSON.parse( localStorage.getItem('token')).token
             Axios.delete('/PostStar?ProjectId='+file.projectId+'&GroupId='+file.groupId+'&PostId='+file.postId+'&Account='+this.state.account+'&Name='+this.state.filename,
-            {headers: { "Authorization": 'Bearer ' +token }})
+            {headers: { token: token }})
             .then(()=>{
                 let fdata=[...this.state.data]
                 for(let i=0;i<fdata.length;i++){

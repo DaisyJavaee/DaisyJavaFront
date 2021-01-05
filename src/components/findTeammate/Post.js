@@ -107,7 +107,7 @@ export default class Post extends Component {
                                   groupId:parseInt(this.state.GroupId)
                                 }
                                 console.log(dataSent)
-                                axios.post('/Application',dataSent,{headers: { "Authorization": 'Bearer ' +token }})
+                                axios.post('/Application',dataSent,{headers: { token: token }})
                                 .then(response=>{
                                   console.log(response)
                                   window.alert("申请成功")

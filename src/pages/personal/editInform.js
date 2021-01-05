@@ -5,8 +5,7 @@ import '../../style/personal/editInform.css'
 import HeaderNav from '../../components/comm/HeaderNav'
 import Footer from '../../components/comm/Footer'
 import Axios from 'axios'
-
-
+import UserComp from './userComp'
 const { TextArea } = Input;
 
 var data=JSON.parse(localStorage.getItem("userData"))
@@ -184,7 +183,7 @@ export default class EditInform extends Component {
     saveEdit(){
         var token=JSON.parse( localStorage.getItem('token')).token
 
-        Axios.put("/Users/"+this.state.data.account,this.state.data,{headers: { "Authorization": 'Bearer ' +token }})
+        Axios.put("/Users/"+this.state.data.account,this.state.data,{headers: { token: token }})
         .then(response=>{
             console.log(response);})
         .catch(error=>{

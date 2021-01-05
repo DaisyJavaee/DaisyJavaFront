@@ -129,7 +129,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
     console.log(dataSent)
     if(isLogined()){
       var token=JSON.parse( localStorage.getItem('token')).token
-      axios.post('/Report',dataSent, {headers: { "Authorization": 'Bearer ' +token }})
+      axios.post('/Report',dataSent, {headers: { token: token }})
         .then(response=>{
           console.log(response)
           window.alert("举报成功")
