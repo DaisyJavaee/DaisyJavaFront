@@ -29,9 +29,6 @@ export default class AdminIndex extends Component {
                         return (<Menu.Item key={index}><Link to={item.path}>{item.title}</Link></Menu.Item>)
                       })
                     }
-                    {/* <Menu.Item key="1"><Link to="/admin/comp">比赛管理</Link></Menu.Item>
-                    <Menu.Item key="2"><Link to="/admin/dealreport">处理举报</Link></Menu.Item>
-                    <Menu.Item key="3"><Link to="/admin/usermanagement">用户管理</Link></Menu.Item> */}
                   </Menu>
                 </Sider>
                 <Layout style={{ padding: '16px' }}>              

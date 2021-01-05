@@ -40,16 +40,6 @@ export const adminRoutes = [{
     component: CompManagement
 },
 {
-    path: "/admin/dealreport",
-    title: "处理举报",
-    component: ReportManagement
-},
-// {
-//     path: "/admin/usermanagement",
-//     title: "用户管理",
-//     component: UserManagement
-// },
-{
     path: "/admin/sysannounce",
     title: "发布系统公告",
     component: DeliverSystemAnnouncement
