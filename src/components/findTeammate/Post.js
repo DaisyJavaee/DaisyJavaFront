@@ -6,7 +6,6 @@ import PostPageReport from '../findTeammate/report'
 //import StarPost from '../findTeammate/StarPost'
 import moment from 'moment'
 import axios from 'axios'
-import Axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;

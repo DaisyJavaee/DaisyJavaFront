@@ -170,26 +170,6 @@ const normFile = (e) => {
   return e && e.fileList
 }
 
-/* 压缩base64图片，怎么压缩base64是题外话，这里不赘述 */
-function compress(
-  base64, // 源图片
-  rate, // 缩放比例
-  // callback // 回调
-) {
-  //处理缩放，转格式
-  var _img = new Image()
-  _img.src = base64
-  console.log("w",_img.width)
-  var _canvas = document.createElement('canvas')
-    var w = _img.width / rate
-    var h = _img.height / rate
-    _canvas.setAttribute('width', w)
-    _canvas.setAttribute('height', h)
-    _canvas.getContext('2d').drawImage(_img, 0, 0, w, h)
-    var nbase64 = _canvas.toDataURL('image/jpeg')
-    console.log("bbb",nbase64)
-  return nbase64
-}
 
 const RegistrationForm = () => {
   const [form] = Form.useForm()
@@ -197,33 +177,27 @@ const RegistrationForm = () => {
 
   const onFinish = (values) => {
     console.log('Received values of form: ', values)
-  
-    var base64 = values.upload[0].thumbUrl
-    console.log(base64)
-    var newbase64 = compress(base64,2)
-    console.log(newbase64)
     // , function (base64) {
     //   console.log("new base64:",base64)
     //   setSo(base64)
     // }
 
     let dataSent = {
-      Account: values.account,
-      Name: values.name,
-      Password: values.password,
-      Nickname: values.nickname,
-      PhoneNum: values.phone.toString(),
-      EmailAddress: values.email,
-      Sex: values.sex,
-      School: values.school,
-      College: values.major,
-      Grade: values.grade,
-      StudentNumber:values.student_num.toString(),
-      Intro: values.intro,
-      Icon: newbase64
+      account: values.account,
+      name: values.name,
+      password: values.password,
+      nickname: values.nickname,
+      phoneNum: values.phone.toString(),
+      emailAddress: values.email,
+      sex: values.sex,
+      school: values.school,
+      college: values.major,
+      grade: values.grade,
+      studentNumber:values.student_num.toString(),
+      intro: values.intro,
     }
     console.log("dataSent:",dataSent)
-    axios.post('/Users', dataSent).then((response) => {
+    axios.post('/user/register', dataSent).then((response) => {
       console.log(response)
       window.alert('注册成功')
     })
@@ -349,7 +323,6 @@ const RegistrationForm = () => {
                 if (!value || getFieldValue('password') === value) {
                   return Promise.resolve()
                 }
-
                 return Promise.reject('两次密码不相符!')
               },
             }),
@@ -464,52 +437,11 @@ const RegistrationForm = () => {
         </Form.Item>
 
         <Form.Item
-          name='upload'
-          label='头像'
-          valuePropName='fileList'
-          getValueFromEvent={normFile}>
-          <Upload name='logo' action='/upload.do' listType='picture'>
-            <Button>
-              <UploadOutlined /> 点击上传
-            </Button>
-          </Upload>
-        </Form.Item>
-
-        <Form.Item
           name='intro'
           label='个人简介'
           extra='让大家详细地认识你!'
           initialValue={'暂无简介'}>
           <Input.TextArea />
-        </Form.Item>
-
-        <Form.Item
-          name='slogan'
-          label='个性签名'
-          extra='来句口号!'
-          initialValue={'暂无口号'}>
-          <Input.TextArea />
-        </Form.Item>
-
-        <Form.Item label='验证码' extra='确保你是人类!'>
-          <Row gutter={8}>
-            <Col span={12}>
-              <Form.Item
-                name='captcha'
-                noStyle
-                rules={[
-                  {
-                    required: true,
-                    message: '请输入你收到的验证码',
-                  },
-                ]}>
-                <Input />
-              </Form.Item>
-            </Col>
-            <Col span={12}>
-              <Button>获取验证码</Button>
-            </Col>
-          </Row>
         </Form.Item>
 
         <Form.Item

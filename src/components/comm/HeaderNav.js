@@ -46,9 +46,9 @@ class HeaderNav extends Component {
     //     }
     // }
     
+
     render() {
-        //this.state.islog=isLogined()
-        this.state.islog=true
+        this.state.islog=isLogined()
         return (
             this.state.islog?
             <div >

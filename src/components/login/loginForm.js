@@ -1,25 +1,29 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Form, Input, Button, Checkbox } from 'antd';
 import { UserOutlined, LockOutlined } from '@ant-design/icons';
 import axios from 'axios'
 import {setToken} from "../../utils/auth"
 
+
+axios.defaults.headers.post['Content-Type'] = 'application/json'; //配置请求头
+
 const NormalLoginForm = () => {
+
   const onFinish = values => {
     console.log('Received values of form: ', values);
-    let dataSent={
-      Account:values.username,
-      Password:values.password,
-    }
-    axios.post('/Users/Login',{
-      Account:values.username,
-      Password:values.password,
+    axios({
+      method: 'post',
+      url: 'user/login',
+      data: JSON.stringify({
+        account:values.username,
+        password:values.password
+      })
     })
     .then(response=>{
       console.log(response)
-      setToken(response.data.jwt, values.username)
+      setToken(response.data.detail, values.username)
       window.alert("登陆成功")
-      window.location.href='#/home'
+      window.location.href='#/allCompPage'
     })
     .catch(function (error) {
       window.alert("登陆失败")
@@ -65,10 +69,6 @@ const NormalLoginForm = () => {
         <Form.Item name="remember" valuePropName="checked" noStyle>
           <Checkbox>记住我</Checkbox>
         </Form.Item>
-
-        <a className="login-form-forgot" href="">
-          忘记密码？
-        </a>
       </Form.Item>
         
       <Form.Item>

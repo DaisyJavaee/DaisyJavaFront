@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import Highlighter from 'react-highlight'
-import { Card, Table, Button, Tag, Space, Input, Popconfirm } from 'antd'
+import { Card, Table, Button, Space, Input, Popconfirm } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import CollectionsPage from '../../components/admin/compEditPop'
 import CompDetail from '../../components/admin/compDetail'
@@ -58,31 +58,26 @@ export default class CompManagement extends Component {
     }
     var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .get('/Project', { headers: { Authorization: 'Bearer ' + token } })
+      .get('project/projects', { headers: { token:token } })
       .then((res) => {
-        console.log('res:', res.data)
         var tempData = []
         var now = moment().format('YYYY-MM-DD')
-        for (var i = 1; i < res.data.length; i++) {
-          console.log('i', res.data[i])
+        for (var i = 1; i < res.data.detail.length; i++) {
           var tempTemp = {
-            id: res.data[i].projectId,
-            name: res.data[i].name,
-            number: res.data[i].participantsNumber,
-            start: res.data[i].startTime,
-            end: res.data[i].endTime,
-            sponsor: res.data[i].host,
-            intro: res.data[i].introduction,
-            tags: getTags(res.data[i].startTime, res.data[i].endTime, now),
+            id: res.data.detail[i].projectId,
+            name: res.data.detail[i].name,
+            number: res.data.detail[i].maxNum,
+            start: res.data.detail[i].startTime,
+            end: res.data.detail[i].endTime,
+            sponsor: res.data.detail[i].host,
+            intro: res.data.detail[i].introduction,
+            tags: getTags(res.data.detail[i].startTime, res.data.detail[i].endTime, now),
           }
-          console.log('tt:', res.data.length, tempTemp)
           tempData.push(tempTemp)
         }
-
         this.setState({
           data: tempData,
         })
-        console.log('data:', this.state.data)
       })
       .catch(function (error) {
         console.log(error)
@@ -91,7 +86,7 @@ export default class CompManagement extends Component {
 
   getDetail = (id) => {
     for (var i = 0; i < this.state.data.length; i++) {
-      if (this.state.data[i].id == id) {
+      if (this.state.data[i].id === id) {
         return this.state.data[i].intro
       }
     }
@@ -166,6 +161,7 @@ export default class CompManagement extends Component {
         key: 'sponsor',
         ...this.getColumnSearchProps('sponsor'),
       },
+      /*
       {
         title: '状态',
         key: 'tags',
@@ -198,7 +194,7 @@ export default class CompManagement extends Component {
             </Tag>
           )
         },
-      },
+      },*/
       {
         title: '操作',
         key: 'action',
@@ -226,55 +222,6 @@ export default class CompManagement extends Component {
         ),
       },
     ]
-
-    // const data = [
-    //   {
-    //     key: '1',
-    //     id: '1',
-    //     name: 'John Brown',
-    //     start: '2020/3/14',
-    //     end: '2020/4/14',
-    //     sponsor: '同济大学',
-    //     tags: ['未开始'],
-    //   },
-    //   {
-    //     key: '2',
-    //     id: '132',
-    //     name: 'poros',
-    //     start: '2020/4/14',
-    //     end: '2020/5/14',
-    //     sponsor: '同济大学',
-    //     tags: ['未开始'],
-    //   },
-    //   {
-    //     key: '3',
-    //     id: '13245',
-    //     name: 'John Brown',
-    //     start: '2021/3/14',
-    //     end: '2021/4/14',
-    //     sponsor: '同济大学',
-    //     tags: ['进行中'],
-    //   },
-    //   {
-    //     key: '4',
-    //     id: '1sad',
-    //     name: 'rich brain',
-    //     start: '2020/3/15',
-    //     end: '2020/4/15',
-    //     sponsor: 'hasjkdhasu',
-    //     tags: ['未开始'],
-    //   },
-    //   {
-    //     key: '5',
-    //     id: '1sad2',
-    //     name: 'John Brown',
-    //     start: '2021/6/15',
-    //     end: '2021/7/15',
-    //     sponsor: 'google',
-    //     tags: ['未开始'],
-    //   },
-    // ]
-
     return (
       <Card
         title='比赛管理'

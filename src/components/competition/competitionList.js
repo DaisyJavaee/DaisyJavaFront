@@ -14,11 +14,12 @@ export default class CompetitionList extends Component {
       pageSize: 5,
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
-     axios.get('/Project')
+     var token = JSON.parse(localStorage.getItem('token')).token
+     axios.get('/project/projects', { headers: { token:token } })
      .then(response=>{
        console.log(response)
        this.setState({
-         total:response.data.length
+         total:response.data.detail.length
         });
    })
    .catch(error=>{
@@ -42,21 +43,22 @@ export default class CompetitionList extends Component {
     }, () => {
       window.location.hash = `#/allCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
-    axios.get('/Project')
+    var token = JSON.parse(localStorage.getItem('token')).token
+    axios.get('/project/projects', { headers: { token:token } })
     .then(response=>{
-      console.log(response)
       this.setState((state)=>{
+        console.log(response.data.detail)
           for(let i=0;i<this.state.pageSize;i++){
             state.currentData.pop();
           }
           if((page-1)*this.state.pageSize+this.state.pageSize<=response.data.length){
             for(let i=(page-1)*this.state.pageSize;i<(page-1)*this.state.pageSize+this.state.pageSize;i++){
-              state.currentData.push(response.data[i]);
+              state.currentData.push(response.data.detail[i]);
             }
           }
           else{
-            for(let i=(page-1)*this.state.pageSize;i<response.data.length;i++){
-              state.currentData.push(response.data[i]);
+            for(let i=(page-1)*this.state.pageSize;i<response.data.detail.length;i++){
+              state.currentData.push(response.data.detail[i]);
             }
           }
           return{
@@ -92,7 +94,6 @@ export default class CompetitionList extends Component {
                     <List.Item.Meta
                     title={<a href={"#/compPage/id="+item.projectId+'/'}>{item.name}</a>
                     }
-                    description={item.description}
                     />
                     {item.introduction}
                 </List.Item>

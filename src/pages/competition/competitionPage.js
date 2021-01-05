@@ -8,8 +8,6 @@ import Helper from '../../components/comm/FloatHelper'
 import CompetitionName from '../../components/competition/competitionName'
 import FindTeamBotton from '../../components/competition/findTeamButton'
 import CompetitionInformation from '../../components/competition/competitionInformation'
-import RaiseDiscuss from '../../components/competition/raiseDiscuss'
-import DiscussList from '../../components/competition/discussList'
 import SubscriptionButton from '../../components/competition/subscriptionButton'
 
 import '../../style/competition/competition.css'
@@ -40,18 +38,19 @@ export default class CompetitionPage extends Component
 
    getData()
     {
-        var requesturl='/Project/'+this.state.compID
-        axios.get(requesturl)
+        var token = JSON.parse(localStorage.getItem('token')).token
+        var requesturl='/project/projects/'+this.state.compID
+        axios.get(requesturl, { headers: { token:token } })
         .then(response=>{
             console.log(response);
             this.setState(
                 {
-                    compName:response.data.name,
-                    compInformation:response.data.introduction,
-                    compHost:response.data.host,
-                    compParticipantsNumber:response.data.participantsNumber,
-                    compStartTime:response.data.startTime,
-                    compEndTime:response.data.endTime
+                    compName:response.data.detail.name,
+                    compInformation:response.data.detail.introduction,
+                    compHost:response.data.detail.host,
+                    compParticipantsNumber:response.data.detail.maxNum,
+                    compStartTime:response.data.detail.startTime,
+                    compEndTime:response.data.detail.endTime
                 })
           })
           .catch(error=>{
@@ -86,8 +85,6 @@ export default class CompetitionPage extends Component
                 <CompetitionInformation compInformation={this.state.compInformation} compHost={this.state.compHost}
                  compParticipantsNumber={this.state.compParticipantsNumber} compStartTime={this.state.compStartTime} 
                  compEndTime={this.state.compEndTime}/>
-                <RaiseDiscuss compID={this.state.compID} className={'RaiseDiscuss'}/>
-                <DiscussList compID={this.state.compID}/>
                 </Col>
             </div>
             <div style={{height:'50px'}}/>

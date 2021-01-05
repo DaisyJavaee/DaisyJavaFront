@@ -1,8 +1,6 @@
 //import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
-import UserManagement from "../pages/admin/userManagement";
 import PageNotFound from "../pages/pageNotFound";
-import Homepage from "../pages/homepage";
 import PostPage from "../pages/findteam/PostPage";
 import Moment from "../pages/community/Moment"
 import FindTeam from "../pages/findteam/FindTeam";
@@ -15,7 +13,6 @@ import CompNotice from "../pages/message/compNotice";
 import Apply from "../pages/message/apply";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
-import PrivateLetter from "../pages/message/privateLetter";
 import UserTeam from "../pages/personal/userTeam"
 import UserComp from "../pages/personal/userComp"
 import UserColle from "../pages/personal/userColle"
@@ -31,7 +28,6 @@ import SearchPage from "../pages/search/searchPage";
 import SearchResult from "../pages/search/searchResult";
 import Login from "../pages/login";
 import Register from "../pages/register";
-import SearchContent from "../components/search/searchContent";
 import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
@@ -67,7 +63,7 @@ export const mainRoutes = [{
 {
     path: "/home",
     title: "主页",
-    component: AllCompetitionPage
+    component: Login
 },
 
 {
