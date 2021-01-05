@@ -11,9 +11,6 @@ import CompNotice from "../pages/message/compNotice";
 import Apply from "../pages/personal/userReceivedApplication";
 import SystemNotice from "../pages/message/systemNotice";
 import TeamMessage from "../pages/message/teamMessage";
-import UserTeam from "../pages/personal/userTeam"
-import UserComp from "../pages/personal/userComp"
-import UserInform from "../pages/personal/userInform"
 import Editinform from "../pages/personal/editInform"
 import EditTeam from "../pages/personal/editTeam"
 

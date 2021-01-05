@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import {Card,List} from 'antd'
 import {EditOutlined} from '@ant-design/icons'
 import { Link } from 'react-router-dom'
-import Axios from 'axios'
+import axios from 'axios'
 
 export default class UserTeam extends Component {
     constructor(props){
@@ -11,15 +11,16 @@ export default class UserTeam extends Component {
           data:[],
         }
         var token=JSON.parse( localStorage.getItem('token')).token
-        Axios.get('/user/groups', {headers: { token: token }})
-        .then((res)=>{
-            this.setState({
-                data:res.detail,
+        axios
+            .get('/user/groups', { headers: { token: token } })
+            .then((res)=>{
+                this.setState({
+                    data: res.data.detail,
+                })
             })
-        })
-        .catch(function(error){
-            console.log(error)
-         })
+            .catch(function(error){
+                console.log(error)
+            })
     }
 
     render() {

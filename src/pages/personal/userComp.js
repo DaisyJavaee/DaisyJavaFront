@@ -15,7 +15,7 @@ export default class UserComp extends Component {
       .then((res)=>{
         console.log(res.data)
         this.setState({
-          data: res.detail // res.data
+          data: res.data.detail // res.data
         })
       })
       .catch(function(error){
