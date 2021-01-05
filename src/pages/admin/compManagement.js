@@ -202,11 +202,11 @@ export default class CompManagement extends Component {
               onConfirm={() => {
                 console.log('confirm')
                 var token = JSON.parse(localStorage.getItem('token')).token
-                axios.delete(`/Project/${record.id}`, {
+                axios.delete(`/projects/${record.id}`, {
                   headers: { Authorization: 'Bearer ' + token },
                 })
-                // this.deleteNode(record.id)
-                //此处调用删除api
+                this.deleteNode(record.id)
+    
               }}>
               <Button danger>删除</Button>
             </Popconfirm>

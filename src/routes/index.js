@@ -1,4 +1,4 @@
-//import AdminIndex from "../pages/admin/adminIndex";
+import AdminIndex from "../pages/admin/adminIndex";
 import CompManagement from "../pages/admin/compManagement";
 import PageNotFound from "../pages/pageNotFound";
 import PostPage from "../pages/findteam/PostPage";
@@ -32,7 +32,6 @@ import SearchContentComp from "../components/search/searchContentComp";
 import SearchContentComm from "../components/search/searchContentComm";
 import SearchContentUsr from "../components/search/searchContentUsr";
 import DeliverSystemAnnouncement from "../pages/admin/deliverSystemAnnouncement";
-import ReportManagement from "../pages/admin/dealReport";
 
 export const adminRoutes = [{
     path: "/admin/comp",

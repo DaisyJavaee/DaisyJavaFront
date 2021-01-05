@@ -112,17 +112,16 @@ const CompDetail = (e) => {
     console.log('Received values of form: ', values)
     //处理数据
     var data = {
-      ProjectId: e.Record.id  ,
-      Name: values.name,
-      Introduction: values.description,
-      ParticipantsNumber: Number(values.number) ,
-      StartTime: values.start,
-      EndTime: values.end,
-      Host: values.sponsor,
+      name: values.name,
+      introduction: values.description,
+      maxNum: Number(values.number) ,
+      startTime: values.start,
+      endTime: values.end,
+      host: values.sponsor,
     }
     var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .put(`/Project/${e.Record.id}`, data, {
+      .put(`/projects/${e.Record.id}`, data, {
         headers: { Authorization: 'Bearer ' + token },
       })
       .then((res) => {

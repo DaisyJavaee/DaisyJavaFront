@@ -32,13 +32,13 @@ export default class DeliverSystemAnnouncement extends Component {
     const onFinish = (values) => {
       console.log('Success:', values)
       var data = {
-        Title: values.announceTitle,
-        Content: values.content,
-        Time: moment().format("YYYY-MM-DD")
+        title: values.announceTitle,
+        content: values.content,
+        noticeTime: moment().format("YYYY-MM-DD")
       }
       console.log("data:",data);
       var token = JSON.parse(localStorage.getItem('token')).token
-      axios.post('/Notice', data, {
+      axios.post('/notice', data, {
         headers: { Authorization: 'Bearer ' + token },
       }).then(res => {
         console.log(res);
@@ -68,7 +68,6 @@ export default class DeliverSystemAnnouncement extends Component {
             ]}>
             <Input />
           </Form.Item>
-
           <Form.Item
             label='公告内容'
             name='content'
