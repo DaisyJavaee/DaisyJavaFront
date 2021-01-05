@@ -121,7 +121,7 @@ const CompDetail = (e) => {
     var token = JSON.parse(localStorage.getItem('token')).token
   
     axios
-      .put(`/projects/${e.Record.id}`, data, { headers: { token:token })
+      .put(`/projects/${e.Record.id}`, data, { headers: { token:token } })
       .then((res) => {
         console.log(res)
       })
