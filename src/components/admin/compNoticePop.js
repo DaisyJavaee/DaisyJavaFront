@@ -108,7 +108,7 @@ const CompNotice = (e) => {
     console.log("data:",data);
     var token = JSON.parse(localStorage.getItem('token')).token
     axios.post('/Notification',data, {
-      headers: { Authorization: 'Bearer ' + token },
+      headers: { token: token },
     }).then(res=>{
       console.log(res);
     })

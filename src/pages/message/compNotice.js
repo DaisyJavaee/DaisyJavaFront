@@ -27,7 +27,7 @@ export default class CompNotice extends Component {
       this.state.account = tempAccount;
       Axios
       .get(`/Notification/`+this.state.account,{
-        headers: { Authorization: 'Bearer ' + token },
+        headers: { token: token },
       })
       .then((res) => { 
         var result=res.data

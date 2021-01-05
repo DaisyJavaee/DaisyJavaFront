@@ -39,7 +39,7 @@ export default class DeliverSystemAnnouncement extends Component {
       console.log("data:",data);
       var token = JSON.parse(localStorage.getItem('token')).token
       axios.post('/notice', data, {
-        headers: { Authorization: 'Bearer ' + token },
+        headers: { token: token },
       }).then(res => {
         console.log(res);
       });

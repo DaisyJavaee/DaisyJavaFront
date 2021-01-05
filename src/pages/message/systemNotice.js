@@ -26,7 +26,7 @@ export default class SystemNotice extends Component {
 
       Axios
       .get(`/Notice`,{
-        headers: { Authorization: 'Bearer ' + token },
+        headers: { token: token },
       })
       .then((res) => { 
         var result=res.data

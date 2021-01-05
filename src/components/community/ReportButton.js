@@ -106,7 +106,7 @@ const CollectionsPageReport = ({
         var token = JSON.parse(localStorage.getItem('token')).token
         axios
           .post('/Report', dataSent, {
-            headers: { Authorization: 'Bearer ' + token },
+            headers: { token: token },
           })
           .then((response) => {
             console.log(response)

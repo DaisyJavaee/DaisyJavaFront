@@ -59,7 +59,7 @@ export default class Apply extends Component {
         var token = JSON.parse(localStorage.getItem('token')).token
         Axios
         .put(`/Application`, data, {
-          headers: { Authorization: 'Bearer ' + token },
+          headers: { token: token },
         })
         .then((res) => {
           console.log(res)
@@ -106,7 +106,7 @@ export default class Apply extends Component {
 
             Axios
             .get(`/Application/`+this.state.account,{
-                headers: { Authorization: 'Bearer ' + token },
+                headers: { token: token },
             })
             .then((res) => { 
                 var result=res.data

@@ -8,7 +8,6 @@ import Helper from '../../components/comm/FloatHelper'
 import CompetitionName from '../../components/competition/competitionName'
 import FindTeamBotton from '../../components/competition/findTeamButton'
 import CompetitionInformation from '../../components/competition/competitionInformation'
-import SubscriptionButton from '../../components/competition/subscriptionButton'
 
 import '../../style/competition/competition.css'
 
@@ -76,8 +75,6 @@ export default class CompetitionPage extends Component
                     </Col>
                     <Col span={6}>
                         <FindTeamBotton compID={this.state.compID}/>
-                        <br/>
-                        <SubscriptionButton compID={this.state.compID}/>
                     </Col>
                 </Row>
                 </div>

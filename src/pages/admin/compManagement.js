@@ -4,7 +4,6 @@ import { Card, Table, Button, Space, Input, Popconfirm,Tag} from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import CollectionsPage from '../../components/admin/compEditPop'
 import CompDetail from '../../components/admin/compDetail'
-import CompNotice from '../../components/admin/compNoticePop'
 import axios from 'axios'
 import moment from 'moment'
 
@@ -13,6 +12,7 @@ function checkTime(stime, etime) {
   //通过replace方法将字符串转换成Date格式
   var sdate = new Date(Date.parse(stime.replace(/-/g, '/')))
   var edate = new Date(Date.parse(etime.replace(/-/g, '/')))
+
   //获取两个日期的年月日
   var smonth = sdate.getMonth() + 1
   var syear = sdate.getFullYear()
@@ -24,10 +24,16 @@ function checkTime(stime, etime) {
   //从年，月，日，分别进行比较
   if (syear > eyear) {
     return false
-  } else {
+  } 
+  else if(syear<eyear){
+    return true;}
+    else {
     if (smonth > emonth) {
       return false
-    } else {
+    } 
+    else if(smonth<emonth){
+      return true;
+    }else {
       if (sday > eday) {
         return false
       } else {
@@ -39,9 +45,9 @@ function checkTime(stime, etime) {
 
 function getTags(start, end, now) {
   if (checkTime(now, start)) {
-    console.log(start, end, now)
     return '未开始'
-  } else if (checkTime(end, now)) {
+  } 
+  else if (checkTime(end, now)) {
     return '已结束'
   }
   return '进行中'
@@ -62,7 +68,7 @@ export default class CompManagement extends Component {
       .then((res) => {
         var tempData = []
         var now = moment().format('YYYY-MM-DD')
-        for (var i = 1; i < res.data.detail.length; i++) {
+        for (var i = 0; i < res.data.detail.length; i++) {
           var tempTemp = {
             id: res.data.detail[i].projectId,
             name: res.data.detail[i].name,
@@ -193,7 +199,6 @@ export default class CompManagement extends Component {
         render: (text, record, detail = this.getDetail(record.id)) => (
           <Space size='middle'>
             <CompDetail Record={record} detail={detail} />
-            <CompNotice Record={record} />
             <Popconfirm
               title='确认删除此项？'
               onCancel={() => {
@@ -203,7 +208,7 @@ export default class CompManagement extends Component {
                 console.log('confirm')
                 var token = JSON.parse(localStorage.getItem('token')).token
                 axios.delete(`/projects/${record.id}`, {
-                  headers: { Authorization: 'Bearer ' + token },
+                  headers: { token:token },
                 })
                 this.deleteNode(record.id)
     

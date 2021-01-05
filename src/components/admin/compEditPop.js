@@ -112,7 +112,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 3, maxRows: 30 }}
-            placeholder="在此输入比赛简介"
+            placeholder="pleas enter the introduction"
           />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
@@ -139,7 +139,7 @@ const CollectionsPage = () => {
     console.log("data:",data);
     var token=JSON.parse( localStorage.getItem('token')).token
     console.log(token)
-    axios.post('/projects',data,{headers: { "token":token }}).then(res=>{
+    axios.post('project',data,{headers: { token:token }}).then(res=>{
       console.log(res);
     })
     setVisible(false)

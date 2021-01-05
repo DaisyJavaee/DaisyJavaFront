@@ -92,7 +92,7 @@ export default class ReadMoment extends Component {
 
       var token = JSON.parse(localStorage.getItem('token')).token
       Axios.post(url, json, {
-        headers: { Authorization: 'Bearer ' + token },
+        headers: { token: token },
       }).then((res) => {
         window.location.reload()
       })

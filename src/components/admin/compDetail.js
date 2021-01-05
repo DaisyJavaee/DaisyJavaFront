@@ -117,13 +117,11 @@ const CompDetail = (e) => {
       maxNum: Number(values.number) ,
       startTime: values.start,
       endTime: values.end,
-      host: values.sponsor,
     }
     var token = JSON.parse(localStorage.getItem('token')).token
+  
     axios
-      .put(`/projects/${e.Record.id}`, data, {
-        headers: { Authorization: 'Bearer ' + token },
-      })
+      .put(`/projects/${e.Record.id}`, data, { headers: { token:token })
       .then((res) => {
         console.log(res)
       })
