@@ -77,8 +77,16 @@ class HeaderNav extends Component {
                                 <Menu.Item key="home" icon={<HomeOutlined />}
                                 style={{margin:'0 50px'}}
                                 >
-                                    <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
+                                    <a href="#/homePage" target="_blank" rel="noopener noreferrer">
                                         首页
+                                    </a>
+                                </Menu.Item>
+
+                                <Menu.Item key="compPage" icon={<RadarChartOutlined />}
+                                style={{margin:'0 50px'}}
+                                >
+                                    <a href="#/allCompPage" target="_blank" rel="noopener noreferrer">
+                                        比赛
                                     </a>
                                 </Menu.Item>
                                 

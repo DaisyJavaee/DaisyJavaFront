@@ -81,6 +81,7 @@ class ActivityShow extends Component {
                                                 width='100%'
                                                 height= '400px'
                                                 src={require("../../img/activity/"+slide.imgSrc+".jpg")}
+                                                alt="error pic"
                                                 /> 
                                             </div>
                                             <div style={{

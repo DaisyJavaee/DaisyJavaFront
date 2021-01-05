@@ -8,18 +8,9 @@ import axios from 'axios'
 import {isLogined} from "../../utils/auth"
 
 const { TextArea } = Input;
-axios.defaults.baseURL='/api';
 var userdata=JSON.parse(localStorage.getItem('userData'));
 
-
-/*模拟已登录用户数据*/
-const data={
-    Account:'111111',
-    UserName:'帅哥学霸ykn',
-    Icon:'strange'
-  }
-
-  const Editor = ({onChange}) => (
+const Editor = ({onChange}) => (
     <>
       <Form.Item>
         <TextArea rows={10} onChange={onChange} style={{width: '90%', resize: 'none'}} placeholder="帖子内容"/>
@@ -41,17 +32,15 @@ export default class CreatePost extends React.Component {
         matchName:'',
         matchMaxMemberNum:0,
         Name:'',
-        Icon:''
       }
 
-      console.log(userdata);
-
-      axios.get('/Project/'+tempId)
+      var token = JSON.parse(localStorage.getItem('token')).token
+      axios.get('projects/'+tempId, { headers: { token:token } })
       .then(response=>{
         console.log(response)
       this.setState({
-        matchName:response.data.name,
-        matchMaxMemberNum:response.data.participantsNumber
+        matchName:response.data.detail.name,
+        matchMaxMemberNum:response.data.detail.maxNumber
       })
     })
     .catch(error=>{
@@ -63,7 +52,8 @@ export default class CreatePost extends React.Component {
     })
 
     if(isLogined()){
-      console.log(userdata.icon)
+      console.log(userdata)
+      /*
       axios.get(userdata.icon)
       .then(res=>{
         console.log(res.data)
@@ -74,7 +64,7 @@ export default class CreatePost extends React.Component {
       .catch(err=>{
         console.log(err)
       })
-      console.log(this.state.Icon)
+      console.log(this.state.Icon)*/
     }
   }
 
@@ -123,7 +113,7 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={isLogined()?userdata.nickname:'请先登录'} disabled/>
+          <Input placeholder={isLogined()?userdata.account:'请先登录'} disabled/>
         </Form.Item>
       </Col>,
     );

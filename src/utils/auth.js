@@ -6,8 +6,6 @@ export function getToken() {
 }
 
 //设置token，登陆时调用
-//rdc：暂时想法是我把jwt和account存下来，然后需要用户的其他信息的时候再用account去查询
-//rdc: 修改，将userdata全部存下来了
 export function setToken(token,account) {
   const usertoken = {
     token:token,
@@ -34,7 +32,7 @@ export function isLogined() {
 }
 
 //判断是否是管理员
-export function  isLoginedAdmin() {
+/*export function  isLoginedAdmin() {
   const storage =JSON.parse( localStorage.getItem("token"));
   var account = JSON.parse(localStorage.userData).account
   let result = false;
@@ -55,7 +53,7 @@ export function  isLoginedAdmin() {
       }
   }
   return result;
-}
+}*/
 
 //退出登录
 export function clearToken() {
@@ -66,11 +64,11 @@ export function clearToken() {
 
 //获取用户的各种信息
 export function getUserInfor(account){
-  var token=JSON.parse( localStorage.getItem('token')).token
-  axios.get('/Users/'+account,{headers: { "Authorization": 'Bearer ' +token }})
+  var token=JSON.parse(localStorage.getItem('token')).token
+  axios.get('user/profile',{headers: { token:token }})
   .then(function (response) {
     console.log(response);
-    var data=response.data
+    var data=response.data.detail
     data['account']=account
     localStorage.setItem("userData", JSON.stringify(data))
   })

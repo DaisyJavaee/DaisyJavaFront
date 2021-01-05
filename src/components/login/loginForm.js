@@ -24,7 +24,7 @@ const NormalLoginForm = () => {
       setToken(response.data.detail.token, values.username)
       window.alert("登陆成功")
       if(response.data.detail.admin===0){
-        window.location.href='#/allCompPage'
+        window.location.href='#/homePage'
       }
       else{
         window.location.href='#/admin'

@@ -7,7 +7,6 @@ import axios from 'axios'
 
 let ProjctId;
 let PostPerPage=10;
-axios.defaults.baseURL='/api';
 var image
 export default class CommunityContent extends Component {
 
