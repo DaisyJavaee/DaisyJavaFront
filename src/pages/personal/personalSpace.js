@@ -1,21 +1,21 @@
 import React, { Component } from 'react'
-import {Route, Link} from "react-router-dom";
+import { Route, Link } from 'react-router-dom'
 import MastHead from '../../components/personal/mastHead'
 import HeaderNav from '../../components/comm/HeaderNav'
-import {Layout,Divider} from 'antd'
+import { Layout, Divider } from 'antd'
 import '../../style/personal/personalSpace.css'
 import { personalRoutes } from '../../routes/index'
 import OtherMenuItem from '../../components/personal/otherMenuItem'
 import MyMenuItem from '../../components/personal/myMenuItem'
 import Footer from '../../components/comm/Footer'
 import { isLogined } from '../../utils/auth'
-import Axios from 'axios';
-import styles from './Center.less';
-import { Card } from 'antd';
+import Axios from 'axios'
+import styles from './Center.less'
+import { Card } from 'antd'
 import UserComp from './userComp'
 import UserTeam from './userTeam'
-import ReceivedApplication from './userReceivedApplication';
-import AppliedApplication from './userAppliedApplication';
+import ReceivedApplication from './userReceivedApplication'
+import AppliedApplication from './userAppliedApplication'
 const operationTabList = [
   {
     key: 'teams',
@@ -26,8 +26,7 @@ const operationTabList = [
           style={{
             fontSize: 14,
           }}
-        >
-        </span>
+        ></span>
       </span>
     ),
   },
@@ -40,8 +39,7 @@ const operationTabList = [
           style={{
             fontSize: 14,
           }}
-        >
-        </span>
+        ></span>
       </span>
     ),
   },
@@ -54,8 +52,7 @@ const operationTabList = [
           style={{
             fontSize: 14,
           }}
-        >
-        </span>
+        ></span>
       </span>
     ),
   },
@@ -68,79 +65,76 @@ const operationTabList = [
           style={{
             fontSize: 14,
           }}
-        >
-        </span>
+        ></span>
       </span>
     ),
   },
-];
+]
 
-export default class PersonalSpace extends Component {  
-  constructor(props){
+export default class PersonalSpace extends Component {
+  constructor(props) {
     super(props)
 
-    this.state={
-      account: this.props.match.params.account,  
-      tabKey:'teams',
-      role: false
+    this.state = {
+      account: this.props.match.params.account,
+      tabKey: 'teams',
+      role: false,
     }
     this.setState({})
     if (!isLogined()) {
-      this.setState({"role": false})
+      this.setState({ role: false })
     } else {
       var logined = JSON.parse(localStorage.getItem('userData')).account
-      this.setState({"role": logined === this.props.match.params.account})
+      this.setState({ role: logined === this.props.match.params.account })
     }
-
-  };
+  }
   onTabChange = (key) => {
     // If you need to sync state to url
     // const { match } = this.props;
     // router.push(`${match.url}/${key}`);
     this.setState({
       tabKey: key,
-    });
-  };
+    })
+  }
   renderChildrenByTabKey = (tabKey) => {
     if (tabKey === 'projects') {
-      return <UserComp />;
+      return <UserComp />
     }
 
     if (tabKey === 'teams') {
-      return <UserTeam />;
+      return <UserTeam />
     }
 
     if (tabKey === 'applied') {
-      return <AppliedApplication />;
+      return <AppliedApplication />
     }
-    
+
     if (tabKey === 'received') {
-      return <ReceivedApplication />;
+      return <ReceivedApplication />
     }
-    return null;
-  };
-  
+    return null
+  }
 
   render() {
-    const { tabKey } = this.state; 
+    const { tabKey } = this.state
     return (
-      <div className='whole_page'>
-        <HeaderNav/>
+      <div className="whole_page">
+        <HeaderNav />
         <div id="perspace_content">
-          <div id='mastHead'>
-            <MastHead role={this.state.role} account={this.state.account}/>
+          <div id="mastHead">
+            <MastHead role={this.state.role} account={this.state.account} />
           </div>
           <Card
-              className={styles.tabsCard}
-              bordered={false}
-              tabList={operationTabList}
-              activeTabKey={tabKey}
-              onTabChange={this.onTabChange}
-            >
-              {this.renderChildrenByTabKey(tabKey)}
+            className={styles.tabsCard}
+            bordered={false}
+            tabList={operationTabList}
+            activeTabKey={tabKey}
+            onTabChange={this.onTabChange}
+          >
+            {this.renderChildrenByTabKey(tabKey)}
           </Card>
         </div>
-        <Footer/>
+        <Footer />
       </div>
     )
   }

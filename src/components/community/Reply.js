@@ -7,12 +7,11 @@ import Axios from 'axios'
 import Avatar from 'antd/lib/avatar/avatar'
 import moment from 'moment'
 
-
 export default class Reply extends Component {
   constructor(props) {
     super()
 
-        console.log("props is ",props)
+    console.log('props is ', props)
 
     const sourceData = [
       {
@@ -28,15 +27,15 @@ export default class Reply extends Component {
       data: sourceData,
       Rid: props.replyId,
       isLoading: true,
-      image:''
+      image: '',
     }
   }
 
   componentDidMount() {
-    console.log("RId shi ",this.state.Rid)
+    console.log('RId shi ', this.state.Rid)
     var url = CONSTURL.GetReplyList + this.state.Rid
     Axios.get(url).then((res) => {
-      console.log("replylist data:",res.data)
+      console.log('replylist data:', res.data)
       var temp = res.data
       for (var i = 0; i < temp.length; i++) {
         temp[i].time = this.deleteLetter(temp[i].time)
@@ -44,22 +43,20 @@ export default class Reply extends Component {
       this.setState({ data: temp })
       this.setState({ isLoading: false })
 
-      console.log("reply  list data",this.state.data)
-      if(this.state.data.length>0){
-        for(var i=0;i<1;i++){
-          Axios.get(this.state.data[i].icon).then((ress)=>{
-            this.setState({image:ress.data})
+      console.log('reply  list data', this.state.data)
+      if (this.state.data.length > 0) {
+        for (var i = 0; i < 1; i++) {
+          Axios.get(this.state.data[i].icon).then((ress) => {
+            this.setState({ image: ress.data })
           })
         }
       }
-
-
     })
   }
 
   deleteLetter(str) {
-    if(str===undefined){
-      str="this is undefined"
+    if (str === undefined) {
+      str = 'this is undefined'
     }
     var result
 
@@ -83,25 +80,26 @@ export default class Reply extends Component {
         {objArr.map((item, index) => (
           <li key={item + index}>
             <Comment
-              className='middle'
+              className="middle"
               actions={[
                 <>
                   <ReportButton
                     ReportUID={this.state.Rid}
-                    ReporterUID='test2'
+                    ReporterUID="test2"
                     Time={moment().format('YYYY-MM-DDTHH:mm:ssC')}
-                    ContentType='reply'
+                    ContentType="reply"
                   />
                 </>,
               ]}
               author={item.nickname}
               avatar={
-                <a href={'#/personal/account='+item.account}>
+                <a href={'#/personal/account=' + item.account}>
                   <Avatar src={this.state.image} />
                 </a>
               }
               content={item.content}
-              datetime={item.time}></Comment>
+              datetime={item.time}
+            ></Comment>
           </li>
         ))}
       </div>

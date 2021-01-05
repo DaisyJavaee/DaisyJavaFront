@@ -1,6 +1,6 @@
-import React, { Component } from "react"
-import { Descriptions, Badge, Card, Button, Input } from "antd"
-import { UserOutlined } from '@ant-design/icons';
+import React, { Component } from 'react'
+import { Descriptions, Badge, Card, Button, Input } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 
 export default class UserManagement extends Component {
   render() {
@@ -9,8 +9,13 @@ export default class UserManagement extends Component {
         title="管理用户"
         extra={
           <div>
-            <Input size="large" placeholder="请输入用户id" prefix={<UserOutlined />} style={{ marginRight: 20, marginBottom: 20}}/>
-            <Button type="primary" style={{ marginBlock: 20 , float: "right"}}>
+            <Input
+              size="large"
+              placeholder="请输入用户id"
+              prefix={<UserOutlined />}
+              style={{ marginRight: 20, marginBottom: 20 }}
+            />
+            <Button type="primary" style={{ marginBlock: 20, float: 'right' }}>
               查找
             </Button>
           </div>
@@ -29,13 +34,9 @@ export default class UserManagement extends Component {
           <Descriptions.Item label="email_address" span={3}>
             <Badge status="processing" text="Running" />
           </Descriptions.Item>
-          <Descriptions.Item label="sex">
-            $80.00
-          </Descriptions.Item>
+          <Descriptions.Item label="sex">$80.00</Descriptions.Item>
           <Descriptions.Item label="school">$20.00</Descriptions.Item>
-          <Descriptions.Item label="college">
-            $60.00
-          </Descriptions.Item>
+          <Descriptions.Item label="college">$60.00</Descriptions.Item>
           <Descriptions.Item label="grade">Prepaid</Descriptions.Item>
           <Descriptions.Item label="student_number">Prepaid</Descriptions.Item>
           <Descriptions.Item label="qq">Prepaid</Descriptions.Item>

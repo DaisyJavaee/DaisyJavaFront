@@ -1,57 +1,61 @@
-import React from 'react';
-import 'antd/dist/antd.css';
-import { Comment, Avatar, Form, Button, Input } from 'antd';
-import { InputNumber } from 'antd';
-import moment from 'moment';
-import { Row, Col} from 'antd';
+import React from 'react'
+import 'antd/dist/antd.css'
+import { Comment, Avatar, Form, Button, Input } from 'antd'
+import { InputNumber } from 'antd'
+import moment from 'moment'
+import { Row, Col } from 'antd'
 import axios from 'axios'
-import {isLogined} from "../../utils/auth"
+import { isLogined } from '../../utils/auth'
 
-const { TextArea } = Input;
-var userdata=JSON.parse(localStorage.getItem('userData'));
+const { TextArea } = Input
+var userdata = JSON.parse(localStorage.getItem('userData'))
 
-const Editor = ({onChange}) => (
-    <>
-      <Form.Item>
-        <TextArea rows={10} onChange={onChange} style={{width: '90%', resize: 'none'}} placeholder="帖子内容"/>
-      </Form.Item>
-    </>
-  );
+const Editor = ({ onChange }) => (
+  <>
+    <Form.Item>
+      <TextArea
+        rows={10}
+        onChange={onChange}
+        style={{ width: '90%', resize: 'none' }}
+        placeholder="帖子内容"
+      />
+    </Form.Item>
+  </>
+)
 
 export default class CreatePost extends React.Component {
+  constructor(props) {
+    super(props)
 
+    let tempId = this.props.matchId
 
-    constructor(props){
-      super(props)
-  
-      let tempId=this.props.matchId
+    this.state = {
+      ProjctId: parseInt(tempId),
+      Content: '',
+      matchName: '',
+      matchMaxMemberNum: 0,
+      Name: '',
+    }
 
-      this.state={
-        ProjctId:parseInt(tempId),
-        Content:'',
-        matchName:'',
-        matchMaxMemberNum:0,
-        Name:'',
-      }
-
-      var token = JSON.parse(localStorage.getItem('token')).token
-      axios.get('projects/'+tempId, { headers: { token:token } })
-      .then(response=>{
+    var token = JSON.parse(localStorage.getItem('token')).token
+    axios
+      .get('projects/' + tempId, { headers: { token: token } })
+      .then((response) => {
         console.log(response)
-      this.setState({
-        matchName:response.data.detail.name,
-        matchMaxMemberNum:response.data.detail.maxNumber
+        this.setState({
+          matchName: response.data.detail.name,
+          matchMaxMemberNum: response.data.detail.maxNumber,
+        })
       })
-    })
-    .catch(error=>{
-      this.setState({
-        matchName:'未找到该比赛',
-        matchIntroduction:'未找到该比赛'
+      .catch((error) => {
+        this.setState({
+          matchName: '未找到该比赛',
+          matchIntroduction: '未找到该比赛',
+        })
+        console.log(error)
       })
-      console.log(error);
-    })
 
-    if(isLogined()){
+    if (isLogined()) {
       console.log(userdata)
       /*
       axios.get(userdata.icon)
@@ -68,21 +72,20 @@ export default class CreatePost extends React.Component {
     }
   }
 
-  TeamNameChange=e=>{
+  TeamNameChange = (e) => {
     this.setState({
-      Name:e.target.value
+      Name: e.target.value,
     })
   }
 
-  
-  ContentChange = e => {
+  ContentChange = (e) => {
     this.setState({
-      Content:e.target.value
+      Content: e.target.value,
     })
-  };
+  }
 
-  getFields=()=>{
-    const children = [];//用于记录比赛信息
+  getFields = () => {
+    const children = [] //用于记录比赛信息
 
     children.push(
       <Col span={10} key={0}>
@@ -96,12 +99,11 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder="输入小队名称" onChange={this.TeamNameChange}/>
+          <Input placeholder="输入小队名称" onChange={this.TeamNameChange} />
         </Form.Item>
-      </Col>,
-    );
+      </Col>
+    )
 
-    
     children.push(
       <Col span={7} key={1}>
         <Form.Item
@@ -113,10 +115,13 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <Input placeholder={isLogined()?userdata.account:'请先登录'} disabled/>
+          <Input
+            placeholder={isLogined() ? userdata.account : '请先登录'}
+            disabled
+          />
         </Form.Item>
-      </Col>,
-    );
+      </Col>
+    )
 
     children.push(
       <Col span={6} key={2}>
@@ -129,86 +134,91 @@ export default class CreatePost extends React.Component {
             },
           ]}
         >
-          <InputNumber placeholder={this.state.matchName} disabled/>
+          <InputNumber placeholder={this.state.matchName} disabled />
         </Form.Item>
-      </Col>,
-    );
+      </Col>
+    )
     children.push(
       <Col span={21} key={3}>
-      <Form.Item
-      name={`帖子内容`}
-      label={`帖子内容`}
-      rules={[
-        {
-          required: true,
-          message: '该项为必填项',
-        },
-      ]}
-      >
-      <Editor onChange={this.ContentChange}/>
-    </Form.Item>
-    </Col>
+        <Form.Item
+          name={`帖子内容`}
+          label={`帖子内容`}
+          rules={[
+            {
+              required: true,
+              message: '该项为必填项',
+            },
+          ]}
+        >
+          <Editor onChange={this.ContentChange} />
+        </Form.Item>
+      </Col>
     )
     children.push(
       <Col span={14} key={4}>
-      <Button shape="round" type="primary" htmlType="submit" onClick={()=>{
-        if(isLogined()){
-          var token=JSON.parse( localStorage.getItem('token')).token
-          if(this.state.Name.length>0&&this.state.Content.length>0){
-          let dataSent={
-            ProjectId:this.state.ProjctId,
-            leaderAccount:userdata.account,
-            postTime:moment().format("YYYY-MM-DDTHH:mm:ssC"),
-            content:this.state.Content,
-            maxMemberNum:this.state.matchMaxMemberNum,
-            name:this.state.Name
-          }
-          console.log(dataSent);
-          axios.post('/Post',dataSent,{headers: { token: token }})
-          .then(response=>{
-            console.log(response)
-            //window.location.reload()
-          })
-          .catch(error=>{
-            console.log(error)
-          })
-        }
-      }
-      else{
-        window.alert("未登录，确定后跳转至登陆界面")
-        window.location.hash ='#/login'
-      }
-      }}>建立小队</Button>
+        <Button
+          shape="round"
+          type="primary"
+          htmlType="submit"
+          onClick={() => {
+            if (isLogined()) {
+              var token = JSON.parse(localStorage.getItem('token')).token
+              if (this.state.Name.length > 0 && this.state.Content.length > 0) {
+                let dataSent = {
+                  ProjectId: this.state.ProjctId,
+                  leaderAccount: userdata.account,
+                  postTime: moment().format('YYYY-MM-DDTHH:mm:ssC'),
+                  content: this.state.Content,
+                  maxMemberNum: this.state.matchMaxMemberNum,
+                  name: this.state.Name,
+                }
+                console.log(dataSent)
+                axios
+                  .post('/Post', dataSent, { headers: { token: token } })
+                  .then((response) => {
+                    console.log(response)
+                    //window.location.reload()
+                  })
+                  .catch((error) => {
+                    console.log(error)
+                  })
+              }
+            } else {
+              window.alert('未登录，确定后跳转至登陆界面')
+              window.location.hash = '#/login'
+            }
+          }}
+        >
+          建立小队
+        </Button>
       </Col>
     )
-    return children;
+    return children
   }
 
   render() {
     return (
       <>
-        <Comment 
+        <Comment
           avatar={
-            <Avatar style={{
-              margin: '0 10px 0 50px',
+            <Avatar
+              style={{
+                margin: '0 10px 0 50px',
               }}
-              src={isLogined()?this.state.Icon:''}
+              src={isLogined() ? this.state.Icon : ''}
             />
           }
           content={
             <Form
-            name="advanced_search"
-            className="ant-advanced-search-form"
-            id='PublishPost'
+              name="advanced_search"
+              className="ant-advanced-search-form"
+              id="PublishPost"
             >
-            <Row gutter={24}>{this.getFields()}</Row>
-        </Form>
+              <Row gutter={24}>{this.getFields()}</Row>
+            </Form>
           }
         />
       </>
-    );
+    )
   }
 }
-
-
-

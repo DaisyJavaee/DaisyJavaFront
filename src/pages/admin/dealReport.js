@@ -5,7 +5,6 @@ import { SearchOutlined } from '@ant-design/icons'
 import ReportDetail from '../../components/admin/reportDetail'
 import axios from 'axios'
 
-
 export default class ReportManagement extends Component {
   constructor(props) {
     super(props)
@@ -70,7 +69,7 @@ export default class ReportManagement extends Component {
         title: '举报者',
         dataIndex: 'reporter',
         key: 'reporter',
-        render: (text) => <a href=''>{text}</a>,
+        render: (text) => <a href="">{text}</a>,
       },
 
       {
@@ -148,7 +147,7 @@ export default class ReportManagement extends Component {
         title: '操作',
         key: 'action',
         render: (text, record) => (
-          <Space size='middle'>
+          <Space size="middle">
             <ReportDetail id={record.id} />
           </Space>
         ),
@@ -160,7 +159,7 @@ export default class ReportManagement extends Component {
     // ]
 
     return (
-      <Card title='处理举报' extra={<div></div>}>
+      <Card title="处理举报" extra={<div></div>}>
         {/* {
             this.state.data.length == 0?"none":JSON.stringify( this.state.data[0].ReportId)   
           } */}
@@ -195,17 +194,19 @@ export default class ReportManagement extends Component {
         />
         <Space>
           <Button
-            type='primary'
+            type="primary"
             onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
-            size='small'
-            style={{ width: 90 }}>
+            size="small"
+            style={{ width: 90 }}
+          >
             Search
           </Button>
           <Button
             onClick={() => this.handleReset(clearFilters)}
-            size='small'
-            style={{ width: 90 }}>
+            size="small"
+            style={{ width: 90 }}
+          >
             Reset
           </Button>
         </Space>

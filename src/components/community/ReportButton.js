@@ -19,9 +19,9 @@ const CollectionCreateForm = ({
   return (
     <Modal
       visible={visible}
-      title='创建举报单'
-      okText='确定'
-      cancelText='取消'
+      title="创建举报单"
+      okText="确定"
+      cancelText="取消"
       onCancel={onCancel}
       onOk={() => {
         form
@@ -33,43 +33,47 @@ const CollectionCreateForm = ({
           .catch((info) => {
             console.log('Validate Failed:', info)
           })
-      }}>
+      }}
+    >
       <Form
         form={form}
-        layout='vertical'
-        name='report_form_in_modal'
+        layout="vertical"
+        name="report_form_in_modal"
         initialValues={{
           tags: 'not_started',
-        }}>
-        <Form.Item name='time' label='举报时间'>
+        }}
+      >
+        <Form.Item name="time" label="举报时间">
           <Input placeholder={Time} disabled />
         </Form.Item>
-        <Form.Item name='reporter_id' label='您的用户id'>
+        <Form.Item name="reporter_id" label="您的用户id">
           <Input placeholder={ReporterUID} disabled />
         </Form.Item>
-        <Form.Item name='target_id' label='被举报帖子id'>
+        <Form.Item name="target_id" label="被举报帖子id">
           <Input placeholder={ReportUID} disabled />
         </Form.Item>
         <Form.Item
-          name='types'
-          label='举报类型'
-          rules={[{ required: true, message: '请选择举报类型' }]}>
-          <Select initialValues='色情' style={{ width: 120 }}>
-            <Option value='sex'>色情</Option>
-            <Option value='policy'>涉政</Option>
-            <Option value='effect'>影响他人</Option>
-            <Option value='trade'>涉及交易</Option>
-            <Option value='spite'>恶意</Option>
+          name="types"
+          label="举报类型"
+          rules={[{ required: true, message: '请选择举报类型' }]}
+        >
+          <Select initialValues="色情" style={{ width: 120 }}>
+            <Option value="sex">色情</Option>
+            <Option value="policy">涉政</Option>
+            <Option value="effect">影响他人</Option>
+            <Option value="trade">涉及交易</Option>
+            <Option value="spite">恶意</Option>
           </Select>
         </Form.Item>
         <Form.Item
-          name='description'
-          label='举报内容'
-          rules={[{ required: true, message: '请填写举报内容' }]}>
+          name="description"
+          label="举报内容"
+          rules={[{ required: true, message: '请填写举报内容' }]}
+        >
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 1, maxRows: 30 }}
-            placeholder='在此输入举报原因等详情'
+            placeholder="在此输入举报原因等详情"
           />
         </Form.Item>
       </Form>
@@ -99,7 +103,7 @@ const CollectionsPageReport = ({
         Content: values.description,
         Time: values.time,
         TargetType: values.t_type,
-        TargetId: Number(values.target_id) ,
+        TargetId: Number(values.target_id),
       }
       console.log(dataSent)
       if (dataSent.Account.length > 0) {

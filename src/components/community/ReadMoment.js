@@ -46,8 +46,8 @@ export default class ReadMoment extends Component {
       },
       isLoading: true,
       Mid: props.momentId,
-      image:'',
-      isStar:false
+      image: '',
+      isStar: false,
     }
 
     this.getMomentContent(this.state.Mid)
@@ -56,7 +56,6 @@ export default class ReadMoment extends Component {
   componentDidMount() {
     // console.log("123123131312")
     this.getMomentContent(this.state.Mid)
-    
   }
 
   getMomentContent(Mid) {
@@ -67,16 +66,14 @@ export default class ReadMoment extends Component {
       this.setState({ data: res.data })
       this.setState({ isLoading: false })
 
+      //    console.log(" detail moment data:",res.data.icon)
 
-  //    console.log(" detail moment data:",res.data.icon)      
-
-      Axios.get(res.data.icon).then((ress)=>{
+      Axios.get(res.data.icon).then((ress) => {
         console.log(ress.data)
-        this.setState({image:ress.data})
+        this.setState({ image: ress.data })
       })
 
       console.log(this.state.data)
-
     })
   }
 
@@ -87,20 +84,20 @@ export default class ReadMoment extends Component {
         Account: JSON.parse(localStorage.userData).account.toString(),
       }
 
-      console.log("点赞数据",json)
+      console.log('点赞数据', json)
       var url = CONSTURL.LikeMoment
 
       var token = JSON.parse(localStorage.getItem('token')).token
       Axios.post(url, json, {
         headers: { token: token },
-      }).then((res) => {
-        window.location.reload()
       })
-      .catch((info) => {
-        console.log(info)
-        window.alert("不可重复点赞")
-      })
-      
+        .then((res) => {
+          window.location.reload()
+        })
+        .catch((info) => {
+          console.log(info)
+          window.alert('不可重复点赞')
+        })
     } else {
       window.alert('未登录，跳转至登陆界面')
       window.location.hash = '#/login'
@@ -109,10 +106,9 @@ export default class ReadMoment extends Component {
 
   starMoment() {
     if (isLogined()) {
-      var t=this.state.isStar
-      this.setState({isStar:!t})
-      console.log("starmoment data",JSON.parse(localStorage.userData))
-
+      var t = this.state.isStar
+      this.setState({ isStar: !t })
+      console.log('starmoment data', JSON.parse(localStorage.userData))
     } else {
       window.alert('未登录，跳转至登陆界面')
       window.location.hash = '#/login'
@@ -123,15 +119,15 @@ export default class ReadMoment extends Component {
     return this.state.isLoading ? (
       <Loading />
     ) : (
-      <div className='site-card-border-less-wrapper'>
+      <div className="site-card-border-less-wrapper">
         <Card
           title={this.state.data.moment.title}
           bordered={false}
           extra={
             //之后可以用button之类的包装一下做成超链接
             //这里的头像要动态生成
-            <div align='right'>
-              <a href={'#/personal/account='+this.state.data.moment.account}>
+            <div align="right">
+              <a href={'#/personal/account=' + this.state.data.moment.account}>
                 <Avatar src={this.state.image}></Avatar>
               </a>
 
@@ -139,49 +135,50 @@ export default class ReadMoment extends Component {
             </div>
           }
           actions={[
-            <Button type='text' onClick={this.starMoment.bind(this)}>
+            <Button type="text" onClick={this.starMoment.bind(this)}>
               <IconText
                 icon={StarOutlined}
                 text={this.state.data.starCount}
-                key='list-vertical-star-o'
+                key="list-vertical-star-o"
               />
             </Button>,
 
-            <Button type='text' onClick={this.likeMoment.bind(this)}>
+            <Button type="text" onClick={this.likeMoment.bind(this)}>
               <IconText
                 icon={LikeOutlined}
                 text={this.state.data.likeCount}
-                key='list-vertical-like-o'
+                key="list-vertical-like-o"
               />
             </Button>,
 
-            <Button type='text'>
+            <Button type="text">
               <IconText
                 icon={CommentOutlined}
                 text={this.state.data.commentCount}
-                key='list-vertical-share-o'
+                key="list-vertical-share-o"
               />
             </Button>,
 
             <ReportButton
               ReportUID={this.state.Mid}
-              ReporterUID='test2'
+              ReporterUID="test2"
               Time={moment().format('YYYY-MM-DDTHH:mm:ssC')}
-              ContentType='moment'
+              ContentType="moment"
             />,
-          ]}>
+          ]}
+        >
           {
             //下面是帖子的内容部分
           }
           <p>{this.state.data.moment.content}</p>
         </Card>
-        {
-            this.state.isStar?
-            <StarMoment 
-            className='StarMoment'
-             userdata={JSON.parse(localStorage.userData)}
-              MomentId={this.state.Mid}/>:null
-        }
+        {this.state.isStar ? (
+          <StarMoment
+            className="StarMoment"
+            userdata={JSON.parse(localStorage.userData)}
+            MomentId={this.state.Mid}
+          />
+        ) : null}
         <br />
       </div>
     )

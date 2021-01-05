@@ -1,6 +1,6 @@
-import React, { Component} from 'react'
+import React, { Component } from 'react'
 import Highlighter from 'react-highlight'
-import { Card, Table, Button, Space, Input, Popconfirm,Tag} from 'antd'
+import { Card, Table, Button, Space, Input, Popconfirm, Tag } from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import CollectionsPage from '../../components/admin/compEditPop'
 import CompDetail from '../../components/admin/compDetail'
@@ -24,16 +24,14 @@ function checkTime(stime, etime) {
   //从年，月，日，分别进行比较
   if (syear > eyear) {
     return false
-  } 
-  else if(syear<eyear){
-    return true;}
-    else {
+  } else if (syear < eyear) {
+    return true
+  } else {
     if (smonth > emonth) {
       return false
-    } 
-    else if(smonth<emonth){
-      return true;
-    }else {
+    } else if (smonth < emonth) {
+      return true
+    } else {
       if (sday > eday) {
         return false
       } else {
@@ -46,8 +44,7 @@ function checkTime(stime, etime) {
 function getTags(start, end, now) {
   if (checkTime(now, start)) {
     return '未开始'
-  } 
-  else if (checkTime(end, now)) {
+  } else if (checkTime(end, now)) {
     return '已结束'
   }
   return '进行中'
@@ -64,7 +61,7 @@ export default class CompManagement extends Component {
     }
     var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .get('projects', { headers: { token:token } })
+      .get('projects', { headers: { token: token } })
       .then((res) => {
         var tempData = []
         var now = moment().format('YYYY-MM-DD')
@@ -76,7 +73,11 @@ export default class CompManagement extends Component {
             start: res.data.detail[i].startTime,
             end: res.data.detail[i].endTime,
             intro: res.data.detail[i].introduction,
-            tags: getTags(res.data.detail[i].startTime, res.data.detail[i].endTime, now),
+            tags: getTags(
+              res.data.detail[i].startTime,
+              res.data.detail[i].endTime,
+              now
+            ),
           }
           tempData.push(tempTemp)
         }
@@ -197,10 +198,10 @@ export default class CompManagement extends Component {
         title: '操作',
         key: 'action',
         render: (text, record, detail = this.getDetail(record.id)) => (
-          <Space size='middle'>
+          <Space size="middle">
             <CompDetail Record={record} detail={detail} />
             <Popconfirm
-              title='确认删除此项？'
+              title="确认删除此项？"
               onCancel={() => {
                 console.log('cancel')
               }}
@@ -208,11 +209,11 @@ export default class CompManagement extends Component {
                 console.log('confirm')
                 var token = JSON.parse(localStorage.getItem('token')).token
                 axios.delete(`/projects/${record.id}`, {
-                  headers: { token:token },
+                  headers: { token: token },
                 })
                 this.deleteNode(record.id)
-    
-              }}>
+              }}
+            >
               <Button danger>删除</Button>
             </Popconfirm>
           </Space>
@@ -221,12 +222,13 @@ export default class CompManagement extends Component {
     ]
     return (
       <Card
-        title='比赛管理'
+        title="比赛管理"
         extra={
           <div>
             <CollectionsPage />
           </div>
-        }>
+        }
+      >
         <Table columns={columns} bordered dataSource={this.state.data} />
       </Card>
     )
@@ -274,17 +276,19 @@ export default class CompManagement extends Component {
         />
         <Space>
           <Button
-            type='primary'
+            type="primary"
             onClick={() => this.handleSearch(selectedKeys, confirm, dataIndex)}
             icon={<SearchOutlined />}
-            size='small'
-            style={{ width: 90 }}>
+            size="small"
+            style={{ width: 90 }}
+          >
             Search
           </Button>
           <Button
             onClick={() => this.handleReset(clearFilters)}
-            size='small'
-            style={{ width: 90 }}>
+            size="small"
+            style={{ width: 90 }}
+          >
             Reset
           </Button>
         </Space>

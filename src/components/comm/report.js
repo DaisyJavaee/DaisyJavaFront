@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Button, Modal, Form, Input, Checkbox, Row, Col } from "antd"
+import React, { useState } from 'react'
+import { Button, Modal, Form, Input, Checkbox, Row, Col } from 'antd'
 
 const layout = {
   labelCol: {
@@ -28,7 +28,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             onCreate(values)
           })
           .catch((info) => {
-            console.log("Validate Failed:", info)
+            console.log('Validate Failed:', info)
           })
       }}
     >
@@ -37,7 +37,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="report_form_in_modal"
         initialValues={{
-          tags: "not_started",
+          tags: 'not_started',
         }}
       >
         {/* key: "1",
@@ -53,7 +53,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
         >
@@ -65,7 +65,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
         >
@@ -77,7 +77,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
         >
@@ -98,7 +98,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="sex"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   色情
@@ -108,7 +108,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="political"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   涉政
@@ -118,7 +118,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="influence"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   影响他人
@@ -128,7 +128,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="trade"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   涉及交易
@@ -138,7 +138,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="attack"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   恶意
@@ -148,7 +148,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
                 <Checkbox
                   value="else"
                   style={{
-                    lineHeight: "32px",
+                    lineHeight: '32px',
                   }}
                 >
                   其他
@@ -167,7 +167,7 @@ const CollectionsPageReport = () => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
-    console.log("Received values of form: ", values)
+    console.log('Received values of form: ', values)
     //处理数据
     setVisible(false)
   }

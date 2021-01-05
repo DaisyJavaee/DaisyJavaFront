@@ -170,7 +170,6 @@ const normFile = (e) => {
   return e && e.fileList
 }
 
-
 const RegistrationForm = () => {
   const [form] = Form.useForm()
   const [so, setSo] = useState(false)
@@ -193,10 +192,10 @@ const RegistrationForm = () => {
       school: values.school,
       college: values.major,
       grade: values.grade,
-      studentNumber:values.student_num.toString(),
+      studentNumber: values.student_num.toString(),
       intro: values.intro,
     }
-    console.log("dataSent:",dataSent)
+    console.log('dataSent:', dataSent)
     axios.post('/user/register', dataSent).then((response) => {
       console.log(response)
       window.alert('注册成功')
@@ -204,12 +203,13 @@ const RegistrationForm = () => {
   }
 
   const prefixSelector = (
-    <Form.Item name='prefix' noStyle>
+    <Form.Item name="prefix" noStyle>
       <Select
         style={{
           width: 70,
-        }}>
-        <Option value='86'>+86</Option>
+        }}
+      >
+        <Option value="86">+86</Option>
       </Select>
     </Form.Item>
   )
@@ -232,20 +232,21 @@ const RegistrationForm = () => {
   }
 
   return (
-    <Card className='register-card' title='注册' size='default' bordered={true}>
+    <Card className="register-card" title="注册" size="default" bordered={true}>
       <br />
       <Form
         {...formItemLayout}
         form={form}
-        name='register'
+        name="register"
         onFinish={onFinish}
         initialValues={{
           prefix: '86',
         }}
-        scrollToFirstError>
+        scrollToFirstError
+      >
         <Form.Item
-          name='account'
-          label='账户名'
+          name="account"
+          label="账户名"
           rules={[
             {
               type: 'string',
@@ -257,12 +258,13 @@ const RegistrationForm = () => {
               message: '请输入您的账户名',
             },
           ]}
-          hasFeedback>
+          hasFeedback
+        >
           <Input />
         </Form.Item>
         <Form.Item
-          name='email'
-          label='E-mail'
+          name="email"
+          label="E-mail"
           rules={[
             {
               type: 'email',
@@ -273,20 +275,22 @@ const RegistrationForm = () => {
               message: '请输入您的邮箱',
             },
           ]}
-          hasFeedback>
+          hasFeedback
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name='phone'
-          label='手机号'
+          name="phone"
+          label="手机号"
           rules={[
             {
               required: true,
               message: '请输入您的手机号',
             },
           ]}
-          hasFeedback>
+          hasFeedback
+        >
           <InputNumber
             addonBefore={prefixSelector}
             style={{
@@ -296,21 +300,22 @@ const RegistrationForm = () => {
         </Form.Item>
 
         <Form.Item
-          name='password'
-          label='密码'
+          name="password"
+          label="密码"
           rules={[
             {
               required: true,
               message: '请输入您的密码',
             },
           ]}
-          hasFeedback>
+          hasFeedback
+        >
           <Input.Password />
         </Form.Item>
 
         <Form.Item
-          name='confirm'
-          label='再次输入密码'
+          name="confirm"
+          label="再次输入密码"
           dependencies={['password']}
           hasFeedback
           rules={[
@@ -326,53 +331,57 @@ const RegistrationForm = () => {
                 return Promise.reject('两次密码不相符!')
               },
             }),
-          ]}>
+          ]}
+        >
           <Input.Password />
         </Form.Item>
 
         <Form.Item
-          name='name'
-          label='姓名'
+          name="name"
+          label="姓名"
           rules={[
             {
               required: true,
               message: '请输入您的姓名',
             },
           ]}
-          hasFeedback>
+          hasFeedback
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name='sex'
-          label='性别'
+          name="sex"
+          label="性别"
           rules={[
             {
               required: true,
               message: '请选择您的性别',
             },
-          ]}>
+          ]}
+        >
           <Radio.Group>
-            <Radio value='male'>男</Radio>
-            <Radio value='female'>女</Radio>
+            <Radio value="male">男</Radio>
+            <Radio value="female">女</Radio>
           </Radio.Group>
         </Form.Item>
 
         <Form.Item
-          name='school'
-          label='学校'
+          name="school"
+          label="学校"
           rules={[
             {
               required: true,
               message: '请输入您的学校',
             },
-          ]}>
+          ]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name='student_num'
-          label='学号'
+          name="student_num"
+          label="学号"
           rules={[
             {
               type: 'number',
@@ -383,26 +392,28 @@ const RegistrationForm = () => {
               required: true,
               message: '请输入您的学号',
             },
-          ]}>
+          ]}
+        >
           <InputNumber />
         </Form.Item>
 
         <Form.Item
-          name='major'
-          label='专业'
+          name="major"
+          label="专业"
           rules={[
             {
               required: true,
               message: '请输入您的专业',
             },
-          ]}>
+          ]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name='grade'
-          label='学历'
-          extra='从一年级开始每年加1！'
+          name="grade"
+          label="学历"
+          extra="从一年级开始每年加1！"
           rules={[
             {
               type: 'number',
@@ -412,17 +423,18 @@ const RegistrationForm = () => {
               required: true,
               message: '请输入您的学历',
             },
-          ]}>
+          ]}
+        >
           <InputNumber min={1} max={30} />
         </Form.Item>
 
         <Form.Item
-          name='nickname'
+          name="nickname"
           initialValue={Form.name}
           label={
             <span>
               昵称&nbsp;
-              <Tooltip title='朋友们要叫你什么呢?'>
+              <Tooltip title="朋友们要叫你什么呢?">
                 <QuestionCircleOutlined />
               </Tooltip>
             </span>
@@ -432,21 +444,23 @@ const RegistrationForm = () => {
               required: true,
               message: '请输入您的昵称',
             },
-          ]}>
+          ]}
+        >
           <Input />
         </Form.Item>
 
         <Form.Item
-          name='intro'
-          label='个人简介'
-          extra='让大家详细地认识你!'
-          initialValue={'暂无简介'}>
+          name="intro"
+          label="个人简介"
+          extra="让大家详细地认识你!"
+          initialValue={'暂无简介'}
+        >
           <Input.TextArea />
         </Form.Item>
 
         <Form.Item
-          name='agreement'
-          valuePropName='checked'
+          name="agreement"
+          valuePropName="checked"
           rules={[
             {
               validator: (_, value) =>
@@ -455,17 +469,18 @@ const RegistrationForm = () => {
                   : Promise.reject('需要先阅读并同意以上内容！'),
             },
           ]}
-          {...tailFormItemLayout}>
+          {...tailFormItemLayout}
+        >
           <Checkbox>
-            我已阅读并同意 <a href=''>《用户协议》</a> 及<a href=''>《须知》</a>
+            我已阅读并同意 <a href="">《用户协议》</a> 及<a href="">《须知》</a>
           </Checkbox>
         </Form.Item>
         <br></br>
         <Form.Item {...tailFormItemLayout}>
-          <Button type='primary' htmlType='submit'>
+          <Button type="primary" htmlType="submit">
             注册
           </Button>
-          &nbsp;&nbsp;&nbsp;已有账号？<a href='#/login'>现在登录！</a>
+          &nbsp;&nbsp;&nbsp;已有账号？<a href="#/login">现在登录！</a>
         </Form.Item>
       </Form>
     </Card>

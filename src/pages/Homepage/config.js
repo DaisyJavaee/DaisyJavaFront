@@ -1,5 +1,3 @@
-const CONSTURL={
-
-}
+const CONSTURL = {}
 
 export default CONSTURL

@@ -1,16 +1,20 @@
-import React, { useState,Component } from "react"
-import { Modal, Form, Input,Select, Popover } from "antd"
-import { WarningOutlined} from "@ant-design/icons"
-import axios from "axios"
+import React, { useState, Component } from 'react'
+import { Modal, Form, Input, Select, Popover } from 'antd'
+import { WarningOutlined } from '@ant-design/icons'
+import axios from 'axios'
 import moment from 'moment'
-import { isLogined } from "../../utils/auth";
-const { Option } = Select;
-
-
-
+import { isLogined } from '../../utils/auth'
+const { Option } = Select
 
 //添加举报的弹出框
-const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time }) => {
+const CollectionCreateForm = ({
+  visible,
+  onCreate,
+  onCancel,
+  ReportUID,
+  ReporterUID,
+  Time,
+}) => {
   const [form] = Form.useForm()
   return (
     <Modal
@@ -27,7 +31,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
             onCreate(values)
           })
           .catch((info) => {
-            console.log("Validate Failed:", info)
+            console.log('Validate Failed:', info)
           })
       }}
     >
@@ -36,7 +40,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
         layout="vertical"
         name="report_form_in_modal"
         initialValues={{
-          tags: "not_started",
+          tags: 'not_started',
         }}
       >
         {/* key: "1",
@@ -52,12 +56,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
           initialValue={Time}
         >
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item
           name="reporter_id"
@@ -65,12 +69,12 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
           initialValue={ReporterUID}
         >
-          <Input/>
+          <Input />
         </Form.Item>
         <Form.Item
           name="target_id"
@@ -78,22 +82,25 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
           rules={[
             {
               required: true,
-              message: "#",
+              message: '#',
             },
           ]}
           initialValue={ReportUID}
         >
-          <Input/>
+          <Input />
         </Form.Item>
-        <Form.Item name="types" label="举报类型" 
-        rules={[{ required: true, message: '请选择举报类型' }]}>
-        <Select initialValues="色情" style={{ width: 120 }}>
-          <Option value="sex">色情</Option>
-          <Option value="policy">涉政</Option>
-          <Option value="effect">影响他人</Option>
-          <Option value="trade">涉及交易</Option>
-          <Option value="spite">恶意</Option>
-    </Select>
+        <Form.Item
+          name="types"
+          label="举报类型"
+          rules={[{ required: true, message: '请选择举报类型' }]}
+        >
+          <Select initialValues="色情" style={{ width: 120 }}>
+            <Option value="sex">色情</Option>
+            <Option value="policy">涉政</Option>
+            <Option value="effect">影响他人</Option>
+            <Option value="trade">涉及交易</Option>
+            <Option value="spite">恶意</Option>
+          </Select>
         </Form.Item>
         <Form.Item name="description" label="举报内容">
           <Input.TextArea
@@ -102,42 +109,42 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUI
             placeholder="在此输入举报原因等详情"
           />
         </Form.Item>
-</Form>
+      </Form>
     </Modal>
   )
 }
 
 //调用按钮
-const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
+const CollectionsPageReport = ({ ReporterUID, ReportUID, Time, compID }) => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
-    console.log("Received values of form: ", values)
+    console.log('Received values of form: ', values)
     //处理数据
-    values.time=moment(Time).format('YYYY-MM-DDTHH:mm:ssC');
-    values.reporter_id=ReporterUID;
-    values.target_id=ReportUID;
-    console.log("Received values of form: ", values)
-    let dataSent={
-      Account:values.reporter_id,
-      ReportType:values.types,
-      Content:values.description,
-      Time:values.time,
-      TargetType:'discussion',
-      TargetId:values.target_id
+    values.time = moment(Time).format('YYYY-MM-DDTHH:mm:ssC')
+    values.reporter_id = ReporterUID
+    values.target_id = ReportUID
+    console.log('Received values of form: ', values)
+    let dataSent = {
+      Account: values.reporter_id,
+      ReportType: values.types,
+      Content: values.description,
+      Time: values.time,
+      TargetType: 'discussion',
+      TargetId: values.target_id,
     }
     console.log(dataSent)
-    if(isLogined()){
-      var token=JSON.parse( localStorage.getItem('token')).token
-      axios.post('/Report',dataSent, {headers: { token: token }})
-        .then(response=>{
+    if (isLogined()) {
+      var token = JSON.parse(localStorage.getItem('token')).token
+      axios
+        .post('/Report', dataSent, { headers: { token: token } })
+        .then((response) => {
           console.log(response)
-          window.alert("举报成功")
+          window.alert('举报成功')
         })
-      }
-      else{
-        window.alert("举报失败")
-      }
+    } else {
+      window.alert('举报失败')
+    }
     setVisible(false)
   }
 
@@ -145,12 +152,11 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
     <Popover content={<p>report</p>}>
       <WarningOutlined
         onClick={() => {
-          if(!isLogined())
-          {
-            window.alert("未登录，确定后跳转至登陆界面")
-            window.location.hash ='#/login'
-            return 
-         }
+          if (!isLogined()) {
+            window.alert('未登录，确定后跳转至登陆界面')
+            window.location.hash = '#/login'
+            return
+          }
           setVisible(true)
         }}
       />
@@ -168,11 +174,14 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time,compID}) => {
   )
 }
 
-
 export default class Report extends Component {
   render() {
     return (
-        <CollectionsPageReport ReportUID={this.props.ReportUID} ReporterUID={this.props.ReporterUID} Time={this.props.Time}/>
+      <CollectionsPageReport
+        ReportUID={this.props.ReportUID}
+        ReporterUID={this.props.ReporterUID}
+        Time={this.props.Time}
+      />
     )
   }
 }

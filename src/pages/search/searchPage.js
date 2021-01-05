@@ -9,19 +9,19 @@ import Footer from '../../components/comm/Footer'
 import HeaderNav from '../../components/comm/HeaderNav'
 
 export default class SearchPage extends Component {
-    render() {
-        return (
-            <div >
-                <HeaderNav/>
+  render() {
+    return (
+      <div>
+        <HeaderNav />
 
-                <LogoBar/>
+        <LogoBar />
 
-                <SearchFrame/>
+        <SearchFrame />
 
-                <HotSearch/>
+        <HotSearch />
 
-                <Footer/>
-            </div>
-        )
-    }
+        <Footer />
+      </div>
+    )
+  }
 }

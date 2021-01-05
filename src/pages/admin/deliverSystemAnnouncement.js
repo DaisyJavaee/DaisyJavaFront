@@ -34,58 +34,63 @@ export default class DeliverSystemAnnouncement extends Component {
       var data = {
         title: values.announceTitle,
         content: values.content,
-        noticeTime: moment().format("YYYY-MM-DD")
+        noticeTime: moment().format('YYYY-MM-DD'),
       }
-      console.log("data:",data);
+      console.log('data:', data)
       var token = JSON.parse(localStorage.getItem('token')).token
-      axios.post('/notice', data, {
-        headers: { token: token },
-      }).then(res => {
-        console.log(res);
-      });
+      axios
+        .post('/notice', data, {
+          headers: { token: token },
+        })
+        .then((res) => {
+          console.log(res)
+        })
     }
 
     const onFinishFailed = (errorInfo) => {
       console.log('Failed:', errorInfo)
     }
     return (
-      <Card title='发布系统公告' bordered={true}>
+      <Card title="发布系统公告" bordered={true}>
         <Form
           {...layout}
           initialValues={{
             remember: true,
           }}
           onFinish={onFinish}
-          onFinishFailed={onFinishFailed}>
+          onFinishFailed={onFinishFailed}
+        >
           <Form.Item
-            label='公告标题'
-            name='announceTitle'
+            label="公告标题"
+            name="announceTitle"
             rules={[
               {
                 required: true,
                 message: '请输入公告标题',
               },
-            ]}>
+            ]}
+          >
             <Input />
           </Form.Item>
           <Form.Item
-            label='公告内容'
-            name='content'
+            label="公告内容"
+            name="content"
             rules={[
               {
                 required: true,
                 message: '请输入公告内容！',
               },
-            ]}>
+            ]}
+          >
             <Input.TextArea
               allowClear={true}
               autoSize={{ minRows: 20, maxRows: 100 }}
-              placeholder='在此输入公告内容'
+              placeholder="在此输入公告内容"
             />
           </Form.Item>
 
           <Form.Item {...tailLayout}>
-            <Button type='primary' htmlType='submit'>
+            <Button type="primary" htmlType="submit">
               发布
             </Button>
           </Form.Item>

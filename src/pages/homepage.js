@@ -1,4 +1,4 @@
-import React, { Component,BackTop } from 'react'
+import React, { Component, BackTop } from 'react'
 import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
 import Footer from '../components/comm/Footer'
@@ -8,27 +8,27 @@ import TopBar from './Homepage/TopBar'
 import CompShow from './Homepage/CompShow'
 
 class Homepage extends Component {
-    state = {
-        collapsed: false,
-        mode: 'inline',
-    };
- 
-    toggle = () => {
-        this.setState({
-            collapsed: !this.state.collapsed,
-        });
-    }
+  state = {
+    collapsed: false,
+    mode: 'inline',
+  }
 
-    render() {
-        return (
-            <div style={{height:'100%'}}>
-                <HeaderNav/>
-                <FloatHelper/>
-                <TopBar/>
-                <Footer/>
-            </div>
-        )
-    }
+  toggle = () => {
+    this.setState({
+      collapsed: !this.state.collapsed,
+    })
+  }
+
+  render() {
+    return (
+      <div style={{ height: '100%' }}>
+        <HeaderNav />
+        <FloatHelper />
+        <TopBar />
+        <Footer />
+      </div>
+    )
+  }
 }
 
 export default Homepage

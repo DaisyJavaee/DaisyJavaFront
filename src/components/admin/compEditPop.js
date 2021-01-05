@@ -1,5 +1,5 @@
-import React, { useState } from "react"
-import { Button, Modal, Form, Input} from "antd"
+import React, { useState } from 'react'
+import { Button, Modal, Form, Input } from 'antd'
 import axios from 'axios'
 
 const layout = {
@@ -39,7 +39,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
             onCreate(values)
           })
           .catch((info) => {
-            console.log("Validate Failed:", info)
+            console.log('Validate Failed:', info)
           })
       }}
     >
@@ -48,7 +48,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         layout="vertical"
         name="form_add_in_modal"
         initialValues={{
-          tags: "not_started",
+          tags: 'not_started',
         }}
       >
         {/* name= "John Brown"
@@ -62,7 +62,7 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "请输入比赛名称",
+              message: '请输入比赛名称',
             },
           ]}
         >
@@ -74,14 +74,14 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "请输入参赛人数",
+              message: '请输入参赛人数',
             },
             {
               validator: nameValidate,
             },
           ]}
         >
-          <Input placeholder="1~100"/>
+          <Input placeholder="1~100" />
         </Form.Item>
         <Form.Item
           name="start"
@@ -89,11 +89,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "请输入比赛开始时间",
+              message: '请输入比赛开始时间',
             },
           ]}
         >
-          <Input placeholder="类似2020-01-01"/>
+          <Input placeholder="类似2020-01-01" />
         </Form.Item>
         <Form.Item
           name="end"
@@ -101,11 +101,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           rules={[
             {
               required: true,
-              message: "请输入比赛结束时间",
+              message: '请输入比赛结束时间',
             },
           ]}
         >
-          <Input placeholder={"类似2020-01-01"}/>
+          <Input placeholder={'类似2020-01-01'} />
         </Form.Item>
 
         <Form.Item name="description" label="比赛简介" initialValue="暂无简介">
@@ -116,7 +116,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           />
         </Form.Item>
         <Form.Item wrapperCol={{ ...layout.wrapperCol, offset: 8 }}></Form.Item>
-        
       </Form>
     </Modal>
   )
@@ -127,20 +126,20 @@ const CollectionsPage = () => {
   const [visible, setVisible] = useState(false)
 
   const onCreate = (values) => {
-    console.log("Received values of form: ", values)
+    console.log('Received values of form: ', values)
     //处理数据
     var data = {
       name: values.name,
       introduction: values.description,
-      maxNum: values.number ,
+      maxNum: values.number,
       startTime: values.start,
       endTime: values.end,
     }
-    console.log("data:",data);
-    var token=JSON.parse( localStorage.getItem('token')).token
+    console.log('data:', data)
+    var token = JSON.parse(localStorage.getItem('token')).token
     console.log(token)
-    axios.post('project',data,{headers: { token:token }}).then(res=>{
-      console.log(res);
+    axios.post('project', data, { headers: { token: token } }).then((res) => {
+      console.log(res)
     })
     setVisible(false)
   }
