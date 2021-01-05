@@ -30,6 +30,18 @@ export default class FindTeam extends Component {
                 <TeamNav matchId={this.state.matchId}/>
                 </div>
                 <Divider/>
+                <div id='page'>
+                <Divider/>
+                <div id='WebPage'>
+                    <div id='PostList'>
+                        <PostList matchId={this.state.matchId}/>
+                    </div>
+                    <br/>
+                    <Divider/>
+                    
+                    <br/>
+                    </div>
+                    </div>
                 <FloatHelper/>
                 </div>
                 <Footer/>

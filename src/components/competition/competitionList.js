@@ -15,7 +15,7 @@ export default class CompetitionList extends Component {
       pageNumber: parseInt(window.location.hash.slice(-1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      var token = JSON.parse(localStorage.getItem('token')).token
-     axios.get('/project/projects', { headers: { token:token } })
+     axios.get('projects', { headers: { token:token } })
      .then(response=>{
        console.log(response)
        this.setState({
@@ -44,7 +44,7 @@ export default class CompetitionList extends Component {
       window.location.hash = `#/allCompPage/pagenum=${page}`; //设置当前页面的hash值为当前page页数
     })
     var token = JSON.parse(localStorage.getItem('token')).token
-    axios.get('/project/projects', { headers: { token:token } })
+    axios.get('projects', { headers: { token:token } })
     .then(response=>{
       this.setState((state)=>{
         console.log(response.data.detail)
@@ -67,20 +67,6 @@ export default class CompetitionList extends Component {
        });
  });
 }
- 
- getData()
- {
-   axios.get('/Project')
-   .then(response=>{
-    console.log(response);
-  })
-  .catch(error=>{
-    console.log(error);
-    window.alert("连接出现问题，点击确定跳转回主页")
-    window.location.hash ='#/home'
-  });
- }
-
 
     render() {
         return (

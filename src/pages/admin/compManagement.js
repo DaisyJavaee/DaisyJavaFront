@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React, { Component} from 'react'
 import Highlighter from 'react-highlight'
-import { Card, Table, Button, Space, Input, Popconfirm } from 'antd'
+import { Card, Table, Button, Space, Input, Popconfirm,Tag} from 'antd'
 import { SearchOutlined } from '@ant-design/icons'
 import CollectionsPage from '../../components/admin/compEditPop'
 import CompDetail from '../../components/admin/compDetail'
@@ -58,7 +58,7 @@ export default class CompManagement extends Component {
     }
     var token = JSON.parse(localStorage.getItem('token')).token
     axios
-      .get('project/projects', { headers: { token:token } })
+      .get('projects', { headers: { token:token } })
       .then((res) => {
         var tempData = []
         var now = moment().format('YYYY-MM-DD')
@@ -69,7 +69,6 @@ export default class CompManagement extends Component {
             number: res.data.detail[i].maxNum,
             start: res.data.detail[i].startTime,
             end: res.data.detail[i].endTime,
-            sponsor: res.data.detail[i].host,
             intro: res.data.detail[i].introduction,
             tags: getTags(res.data.detail[i].startTime, res.data.detail[i].endTime, now),
           }
@@ -156,13 +155,6 @@ export default class CompManagement extends Component {
         sortDirections: ['descend', 'ascend'],
       },
       {
-        title: '主办方',
-        dataIndex: 'sponsor',
-        key: 'sponsor',
-        ...this.getColumnSearchProps('sponsor'),
-      },
-      /*
-      {
         title: '状态',
         key: 'tags',
         dataIndex: 'tags',
@@ -194,7 +186,7 @@ export default class CompManagement extends Component {
             </Tag>
           )
         },
-      },*/
+      },
       {
         title: '操作',
         key: 'action',

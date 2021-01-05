@@ -39,7 +39,7 @@ export default class CompetitionPage extends Component
    getData()
     {
         var token = JSON.parse(localStorage.getItem('token')).token
-        var requesturl='/project/projects/'+this.state.compID
+        var requesturl='projects/'+this.state.compID
         axios.get(requesturl, { headers: { token:token } })
         .then(response=>{
             console.log(response);

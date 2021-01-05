@@ -23,7 +23,7 @@ export default class teamNav extends Component {
       this.setState({
         matchName:response.data.detail.name,
         matchIntroduction:response.data.detail.introduction,
-        matchMaxMemberNum:response.data.detail.maxNumber
+        matchMaxMemberNum:response.data.detail.maxNum
       })
   })
   .catch(error=>{
@@ -34,7 +34,6 @@ export default class teamNav extends Component {
 }
 
 render() {
-  let MaxNum=this.state.matchMaxMemberNum.toString()
     return (
     <>
       <div id="site-page-header-ghost-wrapper">
@@ -47,7 +46,7 @@ render() {
             <Descriptions.Item label="比赛简介">{this.state.matchIntroduction}</Descriptions.Item>
           </Descriptions>
           <Descriptions size="small">
-            <Descriptions.Item label="队伍人数上限">{MaxNum}人</Descriptions.Item>
+            <Descriptions.Item label="队伍人数上限">{this.state.matchMaxMemberNum}人</Descriptions.Item>
           </Descriptions>
         </PageHeader>
         </div>

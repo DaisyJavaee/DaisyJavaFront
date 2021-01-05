@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Button, Modal, Form, Input, Radio } from 'antd'
+import { Button, Modal, Form, Input} from 'antd'
 import axios from 'axios'
 
 const layout = {
@@ -15,14 +15,6 @@ const layout = {
 const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
   console.log('this is record inin:', record)
   const [form] = Form.useForm()
-  const nameValidate = (rule, value, callback) => {
-    if (value > 100) {
-      callback('价格不能大于100')
-    } else {
-      callback()
-    }
-  }
-  // console.log("hi", record)
   return (
     <Modal
       visible={visible}
@@ -92,18 +84,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel, record }) => {
             {
               required: true,
               message: '请输入比赛结束时间',
-            },
-          ]}>
-          <Input />
-        </Form.Item>
-        <Form.Item
-          name='sponsor'
-          label='比赛主办方'
-          initialValue={record.Record.sponsor}
-          rules={[
-            {
-              required: true,
-              message: '请输入比赛主办方名称',
             },
           ]}>
           <Input />

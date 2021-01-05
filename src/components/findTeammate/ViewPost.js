@@ -23,7 +23,8 @@ export default class CommunityContent extends Component {
       pageNumber: parseInt(window.location.hash.slice(1), 0) || 1 //获取当前页面的hash值，转换为number类型
      }
      this.onPageChange=this.onPageChange.bind(this);
-     axios.get('/Post?ProjectId='+ProjctId)
+     var token = JSON.parse(localStorage.getItem('token')).token
+     axios.get('/projects/'+ProjctId+'/groups', { headers: { token:token } })
      .then(response=>{
        //console.log(response)
        this.setState({

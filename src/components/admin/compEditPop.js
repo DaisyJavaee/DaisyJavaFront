@@ -107,18 +107,6 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
         >
           <Input placeholder={"类似2020-01-01"}/>
         </Form.Item>
-        <Form.Item
-          name="sponsor"
-          label="比赛主办方"
-          rules={[
-            {
-              required: true,
-              message: "请输入比赛主办方名称",
-            },
-          ]}
-        >
-          <Input />
-        </Form.Item>
 
         <Form.Item name="description" label="比赛简介" initialValue="暂无简介">
           <Input.TextArea
@@ -147,7 +135,6 @@ const CollectionsPage = () => {
       maxNum: values.number ,
       startTime: values.start,
       endTime: values.end,
-      host: values.sponsor
     }
     console.log("data:",data);
     var token=JSON.parse( localStorage.getItem('token')).token
