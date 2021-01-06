@@ -1,25 +1,11 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css'
-import { Layout,List,Space, Row} from 'antd'
+import { Layout,List,Row} from 'antd'
 import Axios from 'axios';
-import '../../style/homepage.css'
 
-const IconText = ({ icon, text }) => (
-    <Space>
-      {React.createElement(icon)}
-      {text}
-    </Space>
-  );
 
-const { Header, Footer, Sider, Content } = Layout;
- 
-// function limitTxt(txt,count) {
-//     var str = txt;
-//     if(txt.length>count){
-//         str = str.substr(0,count) + '...' ;
-//     }
-//     return str;
-// }
+const { Header, Content } = Layout;
+
 
 class CommunityShow extends Component {
     constructor(props){
@@ -59,25 +45,24 @@ class CommunityShow extends Component {
             return <div>Loading</div>
         }
         else{
-            // if(1){
         return ( 
-            // <div style={{height: '400px',width:'600px',margin:'10px 10px',float:'right'}}>
-            <div style={{height: '100%',margin:'10px'}}>
+            <div style={{width:'60%',
+                marginLeft: '200px'}}>
                 <Layout>
-                    <Header theme='light'>
+                    <Header theme="light">
                         <Content>
                             <Row>
                             <h1 style={{color:'white'}}>系统公告</h1>
                             </Row>
                         </Content>
                     </Header>
-                    <Content style={{paddingLeft:'30px',paddingRight:'30px'}}>
+                    <Content>
                         <List
-                            // bordered={true}
                             itemLayout="horizontal"
                             dataSource={this.state.currentData}
                             renderItem={item => (
                             <List.Item
+                                style={{paddingLeft:'30px',paddingRight:'30px'}}
                                 key={item.noticeId}
                             >
                                 <List.Item.Meta

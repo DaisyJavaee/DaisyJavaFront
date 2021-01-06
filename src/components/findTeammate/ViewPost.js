@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { List, Avatar } from 'antd';
 import{  Pagination  } from 'antd';
 import 'antd/dist/antd.css';
-import { Divider } from 'antd';
 import axios from 'axios'
+import Layout from 'antd/lib/layout/layout';
 
 let ProjectId;
 let PostPerPage=10;
@@ -57,12 +57,6 @@ export default class CommunityContent extends Component {
           if((page-1)*PostPerPage+PostPerPage<=response.data.detail.length){
             for(let i=(page-1)*PostPerPage;i<(page-1)*PostPerPage+PostPerPage;i++){
               state.currentData.push(response.data.detail[i]);
-              /*if(state.currentData[i].icon>0){
-              axios.get(state.currentData[i].icon)
-              .then(res=>{
-                state.currentData.map((item,key)=>key==i?{item,icon:res.data}:item)
-              })
-            }*/
             }
           }
           else{
@@ -100,26 +94,20 @@ export default class CommunityContent extends Component {
     render() {
         const agriculturalListData = this.state.currentData;
         return (
-            <div style={{padding:'0 50px'}}>
-                <br/>
-                <br/>
-                <List
+            <div style={{padding:'10px'}}>
+                  <Layout>
+                    <List
                         itemLayout="horizontal"
                         dataSource={agriculturalListData}
                         renderItem={item => (
                         <List.Item>
                             <List.Item.Meta
-                                 avatar={
-                                  //头像的来源和指向的地址
-                                    <Avatar></Avatar>
-                                }
-                                title={<p>{item.name}</p>}
+                                title={<h2>{item.name}</h2>}
                                 description={<a href={"#/PostPage/MatchId="+ProjectId+"/groupId="+item.groupId}>查看帖子详情</a>}
                             />
                         </List.Item>
                         )}
                     />
-                    <Divider/>
                     <div id='TurnPage'>
                     <Pagination 
                       showQuickJumper 
@@ -129,8 +117,7 @@ export default class CommunityContent extends Component {
                       onChange={this.onPageChange} 
                     />
                     </div>
-                <br/>
-                <br/>
+                  </Layout>
             </div>
         )
     }

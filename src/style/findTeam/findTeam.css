@@ -53,3 +53,7 @@
     size: 8px;
 }
 
+.ant-page-header {
+    border-radius: 10px;
+    border:1px;
+}

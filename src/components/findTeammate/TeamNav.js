@@ -26,7 +26,7 @@ export default class teamNav extends Component {
   })
   .catch(error=>{
     window.alert('连接出错，点击确定返回主页')
-    window.location.hash ='#/allCompPage'
+    window.location.hash ='#/login'
     console.log(error);
   })
 }

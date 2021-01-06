@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
 import 'antd/dist/antd.css';
-import { Card,Button,List,Avatar} from 'antd';
+import { Card,Button,Avatar} from 'antd';
 import '../../style/comm/comm.css'
 import axios from 'axios'
+import Layout from 'antd/lib/layout/layout';
 
 export default class Post extends Component {
     
@@ -56,22 +57,14 @@ export default class Post extends Component {
             <div style={{backgroundColor:'whitesmoke'}}>
                 <Card    
                     extra={
-                        <div align="right">
-                        <h4>当前组员</h4>
-                        <List
-                        size="small"
-                        itemLayout="horizontal"
-                        dataSource={agriculturalListData}
-                        renderItem={item => (
-                        <List.Item>
-                            <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                title={<a>{item}</a>}
-                            />
-                        </List.Item>
-                        )}
-                    />
-                        </div>
+                        <Layout>
+                            <h3>当前组员</h3>
+                            <ul>
+                                {agriculturalListData.map( item  => 
+                                <li><Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" /><a>{item}</a></li> 
+                                )}
+                            </ul>
+                        </Layout>
                         }
                     actions={[
                         <Button shape="round" 
