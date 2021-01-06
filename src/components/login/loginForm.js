@@ -6,6 +6,7 @@ import {setToken} from "../../utils/auth"
 
 
 axios.defaults.headers.post['Content-Type'] = 'application/json'; //配置请求头
+axios.defaults.baseURL='/api';
 
 const NormalLoginForm = () => {
 

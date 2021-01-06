@@ -9,7 +9,7 @@ export function getToken() {
 export function setToken(token,account) {
   const usertoken = {
     token:token,
-    expire: new Date().getTime() + 1000 * 60 * 30//30分钟有效期
+    expire: new Date().getTime() + 1000 * 60 * 60//60分钟有效期
   };
   localStorage.setItem("token", JSON.stringify(usertoken))
   getUserInfor(account)

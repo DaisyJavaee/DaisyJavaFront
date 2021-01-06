@@ -50,7 +50,7 @@ export const mainRoutes = [{
     component: Homepage
 },
 {
-    path: "/postpage/MatchId=:ProjctId/groupId=:groupId/Pid=:id",
+    path: "/postpage/MatchId=:ProjctId/groupId=:groupId",
     title: "寻找队伍帖",
     component: PostPage
 },

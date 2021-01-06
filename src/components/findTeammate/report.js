@@ -5,7 +5,6 @@ import { isLogined } from "../../utils/auth";
 
 
 const { Option } = Select;
-axios.defaults.baseURL='/api';
 
 //添加举报的弹出框
 const CollectionCreateForm = ({ visible, onCreate, onCancel,ReportUID,ReporterUID,Time}) => {
@@ -84,7 +83,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     values.reporter_id=ReporterUID;
     values.target_id=ReportUID;
     console.log("Received values of form: ", values)
-    if(isLogined()){
+    /*if(isLogined()){
       var token=JSON.parse( localStorage.getItem('token')).token
       let dataSent={
         account:values.reporter_id,
@@ -118,7 +117,7 @@ const CollectionsPageReport = ({ReporterUID,ReportUID,Time}) => {
     else{
       window.alert("未登录，确定后跳转至登陆界面")
       window.location.hash ='#/login'
-    }
+    }*/
     //处理数据
     setVisible(false)
   }

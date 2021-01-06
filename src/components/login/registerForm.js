@@ -3,14 +3,9 @@ import {
   Form,
   Input,
   Tooltip,
-  Cascader,
   Select,
-  Row,
-  Col,
   Checkbox,
   Button,
-  AutoComplete,
-  Upload,
   Radio,
   InputNumber,
   Card,
@@ -19,115 +14,6 @@ import { QuestionCircleOutlined, UploadOutlined } from '@ant-design/icons'
 import axios from 'axios'
 
 const { Option } = Select
-const AutoCompleteOption = AutoComplete.Option
-const options = [
-  {
-    value: 'middle',
-    label: '中学',
-    children: [
-      {
-        value: 'junior',
-        label: '初中',
-        children: [
-          {
-            value: '7',
-            label: '初一',
-          },
-          {
-            value: '8',
-            label: '初二',
-          },
-          {
-            value: '9',
-            label: '初三',
-          },
-        ],
-      },
-      {
-        value: 'senior',
-        label: '高中',
-        children: [
-          {
-            value: '10',
-            label: '高一',
-          },
-          {
-            value: '11',
-            label: '高二',
-          },
-          {
-            value: '12',
-            label: '高三',
-          },
-        ],
-      },
-    ],
-  },
-  {
-    value: 'university',
-    label: '大学',
-    children: [
-      {
-        value: 'undergraduate',
-        label: '本科生',
-        children: [
-          {
-            value: 'u1',
-            label: '大一',
-          },
-          {
-            value: 'u2',
-            label: '大二',
-          },
-          {
-            value: 'u3',
-            label: '大三',
-          },
-          {
-            value: 'u4',
-            label: '大四',
-          },
-        ],
-      },
-      {
-        value: 'postgraduate',
-        label: '硕士生',
-        children: [
-          {
-            value: 'p1',
-            label: '研一',
-          },
-          {
-            value: 'p2',
-            label: '研二',
-          },
-          {
-            value: 'p3',
-            label: '研三',
-          },
-          {
-            value: 'p4',
-            label: '研四',
-          },
-        ],
-      },
-      {
-        value: 'doctoral',
-        label: '博士生',
-        children: [
-          {
-            value: 'd',
-            label: '在读博士生',
-          },
-          {
-            value: 'phd',
-            label: '毕业博士生',
-          },
-        ],
-      },
-    ],
-  },
-]
 
 const formItemLayout = {
   labelCol: {
@@ -213,24 +99,7 @@ const RegistrationForm = () => {
       </Select>
     </Form.Item>
   )
-  const [autoCompleteResult, setAutoCompleteResult] = useState([])
-
-  const websiteOptions = autoCompleteResult.map((website) => ({
-    label: website,
-    value: website,
-  }))
-
-  const nameValidate = (rule, value, callback) => {
-    if (value < 1) {
-      callback('年级不可以小于1')
-    }
-    if (value > 30) {
-      callback('年级不可以大于30')
-    } else {
-      callback()
-    }
-  }
-
+ 
   return (
     <Card className='register-card' title='注册' size='default' bordered={true}>
       <br />

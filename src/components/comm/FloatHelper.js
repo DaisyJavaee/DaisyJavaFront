@@ -57,7 +57,6 @@ export default class FloatHelper extends Component {
                     <div style={styleBackTop}>up</div>
                     </BackTop>
                 </div>
-                
                 {/* <div 
                 style={{position:'fixed',float:'right',right:'70px',bottom:'120px'}}
                 >
