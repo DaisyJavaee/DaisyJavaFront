@@ -1,16 +1,14 @@
 import React, { Component } from 'react'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
-import { Layout, Menu, Input, Space,Divider, Button} from 'antd'
-import {CommentOutlined, HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined} from '@ant-design/icons'
+import { Layout, Menu, Space,Divider} from 'antd'
+import {HomeOutlined, UserOutlined, RadarChartOutlined,LogoutOutlined} from '@ant-design/icons'
 import logo from './logo-re.png'
 import { isLogined,clearToken } from '../../utils/auth';
 import LogoutHeaderNav from './LogoutHeaderNav';
 import '../../style/comm/HeaderNav.css'
 
 const { SubMenu } = Menu;
-const { Search } = Input;
-// var islog;
 class HeaderNav extends Component {
 
     constructor(props) {
@@ -31,21 +29,8 @@ class HeaderNav extends Component {
                 islog:false,
             })
         })
-    }
-    // searchJump(value){
-    //     console.log(value)
-    //     console.log(value.length)
-    //     var w=window.open('about:blank')
-    //     if(value.length === 0){
-    //         // window.open="#/search"
-    //         w.location.href="#/search"
-    //     }
-    //     else{
-    //         // var w=window.open('about:blank')
-    //         w.location.href="#/searchResult/type=comp?"+String(value)
-    //     }
-    // }
-    
+        window.location.href='#/login'
+    }    
 
     render() {
         this.state.islog=isLogined()
@@ -116,37 +101,6 @@ class HeaderNav extends Component {
                                         </a>
                                     </Menu.Item>
                                 </SubMenu>
-                                <SubMenu icon={<CommentOutlined />} 
-                                style={{margin:'0 50px'}}
-                                key='messageMenu'
-                                // style={{ visibility: this.state.isVisibility,}}
-                                title={"消息"}>
-                                    <Menu.Item key="systemNotice">
-                                        <a href="#/message/system" target="_blank" rel="noopener noreferrer">
-                                            系统公告
-                                        </a></Menu.Item>
-
-                                    <Menu.Item key="compNotice">
-                                        <a href="#/message/comp" target="_blank" rel="noopener noreferrer">
-                                            比赛通知
-                                        </a></Menu.Item>
-
-                                    <Menu.Item key="replyNotice">
-                                        <a href="#/message/reply" target="_blank" rel="noopener noreferrer">
-                                            回复我的
-                                        </a></Menu.Item>
-
-                                    <Menu.Item key="teamNotice">
-                                        <a href="#/message/team" target="_blank" rel="noopener noreferrer">
-                                            队伍消息
-                                        </a></Menu.Item>
-
-                                    <Menu.Item key="applyNotice">
-                                        <a href="#/message/apply" target="_blank" rel="noopener noreferrer">
-                                            组队申请
-                                        </a>
-                                    </Menu.Item>
-                                </SubMenu>            
                                 
                                 <Menu.Item key="signOut" icon={<LogoutOutlined />}
                                 style={{left:'100px',float:'right'}}

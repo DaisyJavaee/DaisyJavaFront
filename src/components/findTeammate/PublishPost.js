@@ -150,6 +150,7 @@ export default class CreatePost extends React.Component {
           axios.post('/groups?projectId='+this.state.ProjctId,dataSent,{headers: { token: token }})
           .then(response=>{
             console.log(response)
+            window.alert("申请成功")
             //window.location.reload()
           })
           .catch(error=>{
