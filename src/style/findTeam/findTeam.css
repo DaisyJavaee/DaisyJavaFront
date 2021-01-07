@@ -1,55 +1,58 @@
-#page{
-    background-color:white;
+#page {
+  background-color: white;
 }
-#WebPage{
-    margin:50px 100px 50px 100px;
-}
-
-#PostPage{
-    background-color:whitesmoke;
+#WebPage {
+  margin: 50px 100px 50px 100px;
 }
 
-#Publish{
-    box-shadow: 5px 5px 5px 5px lightgrey;
-    width:100%;
-    background-color:white;
+#PostPage {
+  background-color: whitesmoke;
 }
 
-#PostList{
-    background-color:white;
-    height:65%;
-    box-shadow: 5px 5px 5px 5px lightgray;
+#Publish {
+  box-shadow: 5px 5px 5px 5px lightgrey;
+  width: 100%;
+  background-color: white;
 }
 
-#TeamNav{
-    box-shadow: 5px 5px 5px 5px lightskyblue;
+#PostList {
+  background-color: white;
+  height: 65%;
+  box-shadow: 5px 5px 5px 5px lightgray;
 }
 
-#TurnPage{
-    text-align: center;
+#TeamNav {
+  box-shadow: 5px 5px 5px 5px lightskyblue;
 }
 
-
-#Post{
-    height: 100%;
-    background-color: whitesmoke;
+#TurnPage {
+  text-align: center;
 }
 
-#Apply{
-    text-align: center;
+#Post {
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+#Apply {
+  text-align: center;
 }
 
 #site-page-header-ghost-wrapper {
-    padding: 24px;
-    background-color: lightskyblue;
-  }
-
-#actions{
-    text-align: center;
+  padding: 24px;
+  background-color: lightskyblue;
 }
 
-#date{
-    text-align: right;
-    size: 8px;
+#actions {
+  text-align: center;
 }
 
+#date {
+  text-align: right;
+  size: 8px;
+}
+
+.ant-page-header {
+  border-radius: 10px;
+  border: 1px;
+}

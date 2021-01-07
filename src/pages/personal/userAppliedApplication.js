@@ -26,21 +26,18 @@ export default class AppliedApplication extends Component {
       choice: '',
     }
     var token = JSON.parse(localStorage.getItem('token')).token
+    axios
+      .get(`/user/applications`, { headers: { token: token } })
+      .then((res) => {
+        this.setState({'data': res.data.detail})
+      })
     const expandGroup = (application) => {
       axios
-        .get(`/groupId/${application.groupId}`, { headers: { token: token } })
-        .then((res) => res.detail)
+        .get(`/groups/${application.groupId}`, { headers: { token: token } })
+        .then((res) => res.data.detail)
         .then((res) => ({ ...application, res }))
     }
-    axios
-      .get(`/user/applications/receive`, { headers: { token: token } })
-      .then((res) => res.detail)
-      .then((detail) =>
-        Promise.all(detail.map((application) => expandGroup(application)))
-      )
-      .then((data) => {
-        this.setState('data', data)
-      })
+ 
   }
 
   componentDidMount() {
@@ -56,7 +53,7 @@ export default class AppliedApplication extends Component {
         .then((res) => {
           var result = res.data
           this.setState({ data: result })
-          //console.log(res)
+          console.log(this.state.data)
         })
     }
   }
@@ -81,7 +78,7 @@ export default class AppliedApplication extends Component {
                         {item.account}申请加入你的小队！
                       </a>
                     }
-                    description={'小队名称：' + item.name}
+                    description={'小队名称：' + item.groupId}
                     style={{ width: '50%' }}
                   />
                 </Col>

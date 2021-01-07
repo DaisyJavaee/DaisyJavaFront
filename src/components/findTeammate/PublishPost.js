@@ -2,7 +2,6 @@ import React from 'react'
 import 'antd/dist/antd.css'
 import { Comment, Avatar, Form, Button, Input } from 'antd'
 import { InputNumber } from 'antd'
-import moment from 'moment'
 import { Row, Col } from 'antd'
 import axios from 'axios'
 import { isLogined } from '../../utils/auth'
@@ -44,7 +43,7 @@ export default class CreatePost extends React.Component {
         console.log(response)
         this.setState({
           matchName: response.data.detail.name,
-          matchMaxMemberNum: response.data.detail.maxNumber,
+          matchMaxMemberNum: response.data.detail.maxNum,
         })
       })
       .catch((error) => {
@@ -54,22 +53,6 @@ export default class CreatePost extends React.Component {
         })
         console.log(error)
       })
-
-    if (isLogined()) {
-      console.log(userdata)
-      /*
-      axios.get(userdata.icon)
-      .then(res=>{
-        console.log(res.data)
-          this.setState({
-              Icon:res.data
-          })
-      })
-      .catch(err=>{
-        console.log(err)
-      })
-      console.log(this.state.Icon)*/
-    }
   }
 
   TeamNameChange = (e) => {
@@ -165,18 +148,20 @@ export default class CreatePost extends React.Component {
               var token = JSON.parse(localStorage.getItem('token')).token
               if (this.state.Name.length > 0 && this.state.Content.length > 0) {
                 let dataSent = {
-                  ProjectId: this.state.ProjctId,
                   leaderAccount: userdata.account,
-                  postTime: moment().format('YYYY-MM-DDTHH:mm:ssC'),
-                  content: this.state.Content,
-                  maxMemberNum: this.state.matchMaxMemberNum,
+                  introduction: this.state.Content,
+                  maxNum: this.state.matchMaxMemberNum,
                   name: this.state.Name,
+                  groupId: 0,
                 }
                 console.log(dataSent)
                 axios
-                  .post('/Post', dataSent, { headers: { token: token } })
+                  .post('/groups?projectId=' + this.state.ProjctId, dataSent, {
+                    headers: { token: token },
+                  })
                   .then((response) => {
                     console.log(response)
+                    window.alert('申请成功')
                     //window.location.reload()
                   })
                   .catch((error) => {

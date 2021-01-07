@@ -4,7 +4,6 @@ import axios from 'axios'
 import { isLogined } from '../../utils/auth'
 
 const { Option } = Select
-axios.defaults.baseURL = '/api'
 
 //添加举报的弹出框
 const CollectionCreateForm = ({
@@ -83,40 +82,6 @@ const CollectionsPageReport = ({ ReporterUID, ReportUID, Time }) => {
     values.reporter_id = ReporterUID
     values.target_id = ReportUID
     console.log('Received values of form: ', values)
-    if (isLogined()) {
-      var token = JSON.parse(localStorage.getItem('token')).token
-      let dataSent = {
-        account: values.reporter_id,
-        reportType: values.types,
-        content: values.description,
-        time: values.time,
-        targetType: 'post',
-        targetId: parseInt(values.target_id),
-      }
-      if (dataSent.account.length > 0) {
-        console.log(dataSent)
-        axios
-          .post('/Report', dataSent, { headers: { token: token } })
-          .then((response) => {
-            console.log(response)
-            window.alert('举报成功')
-          })
-          .catch((error) => {
-            console.log(error)
-            if (error.response.status === 409) {
-              window.alert('您已经举报过该帖子')
-            } else {
-              window.alert('举报失败')
-            }
-          })
-      } else {
-        window.alert('缺少需要填写项,举报失败')
-      }
-    } else {
-      window.alert('未登录，确定后跳转至登陆界面')
-      window.location.hash = '#/login'
-    }
-    //处理数据
     setVisible(false)
   }
 

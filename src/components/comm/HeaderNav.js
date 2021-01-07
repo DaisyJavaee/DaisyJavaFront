@@ -2,9 +2,8 @@ import React, { Component } from 'react'
 import { NavLink } from 'react-router-dom'
 // import ReactDOM from 'react-dom'
 import 'antd/dist/antd.css'
-import { Layout, Menu, Input, Space, Divider, Button } from 'antd'
+import { Layout, Menu, Space, Divider } from 'antd'
 import {
-  CommentOutlined,
   HomeOutlined,
   UserOutlined,
   RadarChartOutlined,
@@ -16,8 +15,6 @@ import LogoutHeaderNav from './LogoutHeaderNav'
 import '../../style/comm/HeaderNav.css'
 
 const { SubMenu } = Menu
-const { Search } = Input
-// var islog;
 class HeaderNav extends Component {
   constructor(props) {
     super(props)
@@ -25,11 +22,8 @@ class HeaderNav extends Component {
       //   isLogin: false,
       islog: false,
     }
-
-    // 这个绑定是必要的，使`this`在回调中起作用
-    this.logoutClick = this.logoutClick.bind(this)
   }
-
+  
   logoutClick() {
     clearToken()
     setTimeout(() => {
@@ -37,21 +31,8 @@ class HeaderNav extends Component {
         islog: false,
       })
     })
+    window.location.href = '#/login'
   }
-  // searchJump(value){
-  //     console.log(value)
-  //     console.log(value.length)
-  //     var w=window.open('about:blank')
-  //     if(value.length === 0){
-  //         // window.open="#/search"
-  //         w.location.href="#/search"
-  //     }
-  //     else{
-  //         // var w=window.open('about:blank')
-  //         w.location.href="#/searchResult/type=comp?"+String(value)
-  //     }
-  // }
-
   render() {
     this.state.islog = isLogined()
     return this.state.islog ? (
@@ -74,11 +55,6 @@ class HeaderNav extends Component {
                 <img height={'40px'} src={logo} alt="logo" />
               </NavLink>
             </div>
-            {/* <div style={{position:'relative',}}>
-                            <Button onClick={this.handleClick} style={{width:'60px'}}>
-                                {this.state.isLogin ? 'OFF':'IN' }
-                            </Button>
-                        </div> */}
             <div style={{ position: 'relative', width: '100%' }}>
               <Menu
                 id="headerNav"
@@ -98,46 +74,79 @@ class HeaderNav extends Component {
                   icon={<RadarChartOutlined />}
                   style={{ margin: '0 50px' }}
                 >
-                  <NavLink to="allCompPage">比赛</NavLink>
-                </Menu.Item>
-                <Menu.Item key="userHome" icon={<UserOutlined />}>
-                  <NavLink
-                    to={
-                      '/personal/account=' +
-                      (JSON.parse(localStorage.getItem('userData'))
-                        ? JSON.parse(localStorage.getItem('userData')).account
-                        : null)
-                    }
+                  <a
+                    href="#/allCompPage"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    个人主页
-                  </NavLink>
+                    比赛
+                  </a>
                 </Menu.Item>
 
                 <SubMenu
-                  icon={<CommentOutlined />}
+                  icon={<UserOutlined />}
                   style={{ margin: '0 50px' }}
-                  key="messageMenu"
-                  // style={{ visibility: this.state.isVisibility,}}
-                  title={'消息'}
+                  key="personalMenu"
+                  title={'我的'}
                 >
-                  <Menu.Item key="systemNotice">
-                    <NavLink to="message/system">系统公告</NavLink>
+                  <Menu.Item key="userHome">
+                    <a
+                      href={
+                        '#/personal/account=' +
+                        (JSON.parse(localStorage.getItem('userData'))
+                          ? JSON.parse(localStorage.getItem('userData')).account
+                          : null)
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      个人主页
+                    </a>
                   </Menu.Item>
-
-                  <Menu.Item key="compNotice">
-                    <NavLink to="message/comp">比赛通知</NavLink>
+                  <Menu.Item key="userTeam">
+                    <a
+                      href={
+                        '#/personal/account=' +
+                        (JSON.parse(localStorage.getItem('userData'))
+                          ? JSON.parse(localStorage.getItem('userData')).account
+                          : null) +
+                        '/team'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      我的队伍
+                    </a>
                   </Menu.Item>
-
-                  <Menu.Item key="replyNotice">
-                    <NavLink to="message/reply">回复我的</NavLink>
+                  <Menu.Item key="userComp">
+                    <a
+                      href={
+                        '#/personal/account=' +
+                        (JSON.parse(localStorage.getItem('userData'))
+                          ? JSON.parse(localStorage.getItem('userData')).account
+                          : null) +
+                        '/comp'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      我的比赛
+                    </a>
                   </Menu.Item>
-
-                  <Menu.Item key="teamNotice">
-                    <NavLink to="message/team">队伍消息</NavLink>
-                  </Menu.Item>
-
-                  <Menu.Item key="applyNotice">
-                    <NavLink to="message/apply">组队申请</NavLink>
+                  <Menu.Item key="userCollege">
+                    <a
+                      href={
+                        '#/personal/account=' +
+                        (JSON.parse(localStorage.getItem('userData'))
+                          ? JSON.parse(localStorage.getItem('userData')).account
+                          : null) +
+                        '/colle'
+                      }
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      我的收藏
+                    </a>
                   </Menu.Item>
                 </SubMenu>
 

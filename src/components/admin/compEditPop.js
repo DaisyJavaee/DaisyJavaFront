@@ -108,7 +108,11 @@ const CollectionCreateForm = ({ visible, onCreate, onCancel }) => {
           <Input placeholder={'类似2020-01-01'} />
         </Form.Item>
 
-        <Form.Item name="description" label="比赛简介" initialValue="暂无简介">
+        <Form.Item
+          name="description"
+          label="比赛简介"
+          initialValue="no introduction"
+        >
           <Input.TextArea
             allowClear={true}
             autoSize={{ minRows: 3, maxRows: 30 }}
@@ -138,7 +142,7 @@ const CollectionsPage = () => {
     console.log('data:', data)
     var token = JSON.parse(localStorage.getItem('token')).token
     console.log(token)
-    axios.post('project', data, { headers: { token: token } }).then((res) => {
+    axios.post('projects', data, { headers: { token: token } }).then((res) => {
       console.log(res)
     })
     setVisible(false)

@@ -76,11 +76,12 @@ export default class PersonalSpace extends Component {
     super(props)
 
     this.state = {
+      name: "",
       account: this.props.match.params.account,
       tabKey: 'teams',
       role: false,
     }
-    this.setState({})
+
     if (!isLogined()) {
       this.setState({ role: false })
     } else {

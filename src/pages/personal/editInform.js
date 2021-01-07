@@ -44,7 +44,7 @@ export default class EditInform extends Component {
             <Divider orientation="left">基本信息</Divider>
             <Descriptions>
               <Descriptions.Item label="头像">
-                <Avatar size={128} src={this.state.image} />
+                <Avatar size={128} src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />
                 <Upload name="logo" action="/upload.do" listType="picture">
                   <Button>
                     <UploadOutlined /> 点击上传
@@ -167,7 +167,8 @@ export default class EditInform extends Component {
   saveEdit() {
     var token = JSON.parse(localStorage.getItem('token')).token
 
-    Axios.put('/Users/' + this.state.data.account, this.state.data, {
+    Axios.
+    put('/user/profiles' , this.state.data, {
       headers: { token: token },
     })
       .then((response) => {

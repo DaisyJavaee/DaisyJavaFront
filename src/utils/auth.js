@@ -9,7 +9,7 @@ export function getToken() {
 export function setToken(token, account) {
   const usertoken = {
     token: token,
-    expire: new Date().getTime() + 1000 * 60 * 30, //30分钟有效期
+    expire: new Date().getTime() + 1000 * 60 * 60, //60分钟有效期
   }
   localStorage.setItem('token', JSON.stringify(usertoken))
   getUserInfor(account)
@@ -30,30 +30,6 @@ export function isLogined() {
   }
   return result
 }
-
-//判断是否是管理员
-/*export function  isLoginedAdmin() {
-  const storage =JSON.parse( localStorage.getItem("token"));
-  var account = JSON.parse(localStorage.userData).account
-  let result = false;
-  console.log("here",account)
-  if(account !== "fwdarling"){
-    console.log("checked")
-    window.alert("并非管理员！")
-    return false;
-  }
-
-  const time = new Date().getTime();
-  if (storage) {
-      if (time < storage.expire) {
-          result = true;
-      } else {
-          localStorage.removeItem("token");
-          localStorage.removeItem("userData");
-      }
-  }
-  return result;
-}*/
 
 //退出登录
 export function clearToken() {

@@ -12,28 +12,25 @@ import { isLogined } from '../../utils/auth'
 
 export default class PostPage extends Component {
   constructor(props) {
+    super(props)
     if (!isLogined()) {
       window.alert('连接出错，点击确定返回主页.')
       window.location.hash = '#/allCompPage'
     }
-    super(props)
+   
     let projctId = 0
     let groupId = 0
-    let postId = 0
     if (this.props.match.params.ProjctId != null) {
       projctId = this.props.match.params.ProjctId
     }
     if (this.props.match.params.groupId != null) {
       groupId = this.props.match.params.groupId
     }
-    if (this.props.match.params.id != null) {
-      postId = this.props.match.params.id
-    }
     this.state = {
       ProjctId: projctId,
       GroupId: groupId,
-      PostId: postId,
     }
+    console.log(this.state)
   }
 
   render() {

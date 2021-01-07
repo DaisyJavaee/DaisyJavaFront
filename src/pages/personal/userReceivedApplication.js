@@ -21,26 +21,36 @@ export default class ReceivedApplication extends Component {
     this.state = {
       account: '',
       data: [],
+      applications : [],
       visible: false,
       flag: '',
       choice: '',
     }
     var token = JSON.parse(localStorage.getItem('token')).token
-    const expandGroup = (application) => {
-      axios
-        .get(`/groupId/${application.groupId}`, { headers: { token: token } })
-        .then((res) => res.detail)
-        .then((res) => ({ ...application, res }))
-    }
+        
     axios
-      .get(`/user/applications/receive`, { headers: { token: token } })
-      .then((res) => res.detail)
-      .then((detail) =>
-        Promise.all(detail.map((application) => expandGroup(application)))
-      )
-      .then((data) => {
-        this.setState('data', data)
+      .get(`/user/applicationsReceived`, { headers: { token: token } })
+      .then((res) =>{
+        console.log(res.data.detail)
+        this.setState({"data": res.data.detail})
+        return res.data.detail
       })
+      // .all(res.data.detail.map(application => 
+      //   axios
+      //   .get(`/groups/${application.groupId}`, { headers: { token: token } })
+      // )
+      // .then((res) => {
+      //   console.log(res)
+      //   this.setState({'data': res})
+      //   console.log(this.state.data)
+      // })
+      // })
+      // .then((detail) =>
+      //   Promise.all(detail.map((application) => expandGroup(application)))
+      // )
+      // .then((data) => {
+      //   this.setState('data', data)
+      // })
   }
 
   showDrawer = () => {
@@ -88,7 +98,7 @@ export default class ReceivedApplication extends Component {
                         {item.account}申请加入你的小队！
                       </a>
                     }
-                    description={'小队名称：' + item.name}
+                    description={'小队名称：' + item.groupId}
                     style={{ width: '50%' }}
                   />
                 </Col>
@@ -107,7 +117,7 @@ export default class ReceivedApplication extends Component {
                         <Select
                           defaultValue="approve"
                           style={{ width: 120 }}
-                          onChange={this.handleChange.bind(this)}
+                        
                         >
                           <Option value="approve">同意</Option>
                           <Option value="refuse">拒绝</Option>
