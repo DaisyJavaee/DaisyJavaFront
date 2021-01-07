@@ -1,5 +1,3 @@
-//@author poros666 2020/7/25
-
 import React, { Component } from 'react'
 import { Layout, Menu } from 'antd'
 import '../../style/admin/admin.css'

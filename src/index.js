@@ -6,10 +6,7 @@ import { HashRouter as Router, Switch, Route, Redirect } from 'react-router-dom'
 import { mainRoutes } from './routes/index'
 //import { adminRoutes } from './routes/index'
 import AdminIndex from './pages/admin/adminIndex'
-import MessageIndex from './pages/message/messageIndex'
 import PersonalSpace from './pages/personal/personalSpace'
-import { isLoginedAdmin } from './utils/auth'
-
 ReactDOM.render(
   <Router>
     <Switch>
@@ -18,10 +15,6 @@ ReactDOM.render(
         component={(routeProps) =>
           true ? <AdminIndex {...routeProps} /> : <Redirect to="/login" />
         }
-      />
-      <Route
-        path="/message"
-        render={(routeProps) => <MessageIndex {...routeProps} />}
       />
       <Route path="/personal/account=:account" component={PersonalSpace} />
       {mainRoutes.map((route) => {

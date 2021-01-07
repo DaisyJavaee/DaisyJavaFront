@@ -124,7 +124,7 @@ export default class CommunityContent extends Component {
                         item.groupId
                       }
                     >
-                      查看帖子详情
+                      查看队伍详情
                     </a>
                   }
                 />

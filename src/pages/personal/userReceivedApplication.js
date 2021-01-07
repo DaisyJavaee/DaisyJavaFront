@@ -75,9 +75,6 @@ export default class ReceivedApplication extends Component {
           headers: { token: token },
         }
       )
-      .error((err) => {
-        console.log(err)
-      })
     this.onClose()
   }
 

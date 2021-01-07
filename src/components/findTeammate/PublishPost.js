@@ -16,7 +16,7 @@ const Editor = ({ onChange }) => (
         rows={10}
         onChange={onChange}
         style={{ width: '90%', resize: 'none' }}
-        placeholder="帖子内容"
+        placeholder="队伍内容"
       />
     </Form.Item>
   </>
@@ -124,8 +124,8 @@ export default class CreatePost extends React.Component {
     children.push(
       <Col span={21} key={3}>
         <Form.Item
-          name={`帖子内容`}
-          label={`帖子内容`}
+          name={`队伍内容`}
+          label={`队伍内容`}
           rules={[
             {
               required: true,
